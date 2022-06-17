@@ -96,23 +96,23 @@
 
               <div class="form-group">
                 <label for="name">Firstname</label>
-                <input  type="text" class="form-control" placeholder="Enter your firstname"/>
+                <input  type="text" class="form-control" placeholder="Enter your firstname" v-model="firstname"/>
                 <label for="name">Lastname</label>
-                <input type="text" class="form-control" placeholder="Enter your lastname" />
+                <input type="text" class="form-control" placeholder="Enter your lastname" v-model="lastname"/>
                 <label for="name">Email </label>
-                <input type="text"  class="form-control" placeholder="Enter your email" />
+                <input type="text"  class="form-control" placeholder="Enter your email" v-model="email"/>
                 <label for="name">Health card number</label>
-                <input type="text" class="form-control" placeholder="Enter your health card number" />
+                <input type="text" class="form-control" placeholder="Enter your health card number" v-model="healthCardNumber"/>
               </div>
 
                <div class="form-group">
-                <label for="psw" ><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-                <input type="password"  class="form-control"   id="psw"  placeholder="Enter your password"  />
+                <label for="psw" ><span class="glyphicon glyphicon-eye-open" ></span> Password</label>
+                <input type="password"  class="form-control"   id="psw"  placeholder="Enter your password"  v-model="password"/>
               </div>
               <div class="form-group"><label for="psw" ><span class="glyphicon glyphicon-eye-open" ></span> Password again</label >
-               <input type="password" class="form-control" id="psw" placeholder="Enter your password again"/>
+               <input type="password" class="form-control" id="psw" placeholder="Enter your password again" v-model="passwordAgain"/>
               </div>
-              <button type="submit" > <span></span> Submit </button>
+              <button type="submit" @click="Register()"> <span></span> Submit </button>
             </form>
           </div>
           <div class="modal-footer">
@@ -130,18 +130,64 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
+import axios from 'axios';
+
 export default {
   name: "StartPage",
   data() {
     return {
-
+      firstname:"",
+      lastname:"",
+      email:"",
+      password:"",
+      passwordAgain:"",
+      healthCardNumber:"",
+      role:"PATIENT"
 
     };
   },
 
   methods: {
-   
-  }
+async Register() {
+      const headers ={
+              'Content-Type': 'application/json;charset=UTF-8',
+              Accept: 'application/json',
+            }
+    axios.post("http://localhost:58025/api/user",{       
+        Firstname : this.firstname, 
+        Lastname : this.lastname,
+        Email : this.email,
+        Passwordd : this.password,
+        HealthCardNumber : this.healthCardNumber,
+        Role : this.role}, {
+        headers}
+      ).then((res) => {
+            console.log(res);
+            new Swal({
+              title:"Uspesno",
+              type: "warning",
+              text:'Registracija je uspela!',
+            });
+          })
+          .catch((error) => {
+            console.log(error.response.status);
+            if(error.response.status == 417) {
+            new Swal({
+              title:"Nije uspesno",
+              type: "warning",
+              text:'Postoji vec korisnik sa tim email-om!',
+            });
+            }else if (error.response.status == 409) {
+            new Swal({
+              title:"Nije uspesno",
+              type: "warning",
+              text:'Postoji vec korisnik sa tim username-om!',
+            });
+            }
+          });
+        }
+  },
 };
 </script>
 

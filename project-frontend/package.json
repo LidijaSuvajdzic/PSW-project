@@ -18,6 +18,7 @@
     "core-js": "^3.6.5",
     "jquery": "^3.6.0",
     "moment": "^2.29.1",
+    "sweetalert2": "^11.4.17",
     "vue": "^3.0.0",
     "vue-router": "^4.0.12",
     "vue-upload-multiple-image": "^1.1.6",
