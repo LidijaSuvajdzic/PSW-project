@@ -35,13 +35,31 @@ namespace project_backend.Service
             _userRepository.AddEmployee(user);
         }
 
+        public bool IsUserExist(string email)
+        {
+            Debug.WriteLine("Email koji se trazi je " + email);
+            bool isExists = false;
+            User u = _userRepository.FindUserByEmail(email);
+            if (u != null) {
+                Debug.WriteLine("Nasli smo usera"+ u.Email + u.Firstname);
+                isExists = true;
+            }
+
+            return isExists;
+        }
+
 
         public int GenerateId()
         {
             int number= _userRepository.GetAllEmployee().Count + 1;
-            Debug.WriteLine("Broj je" + number);
             return number;
         }
+
+        public void FindUserByEmail(string email) {
+           User u = _userRepository.FindUserByEmail(email);
+           Debug.WriteLine("User je" + u.Firstname);
+        }
+
 
     }
 }

@@ -24,6 +24,15 @@ namespace project_backend.Repository
             }
         }
 
+
+        public User FindUserByEmail(string email) {
+
+            var student = (from s in _context.users
+                           where s.Email == email
+                           select s).FirstOrDefault<User>();
+            return student;
+        }
+
         public List<User> GetAllEmployee()
         {
             return _context.users.ToList();

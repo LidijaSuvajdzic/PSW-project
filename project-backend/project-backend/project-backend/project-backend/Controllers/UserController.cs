@@ -26,10 +26,23 @@ namespace project_backend.Controllers
         [HttpPost]
         public IActionResult Register([FromBody] UserDTO newUser)
         {
+            UserService userService = new UserService();        
+            bool isExists = userService.IsUserExist(newUser.Email);
+            if (isExists) {
+                return BadRequest();
+            } else {
+                userService.Register(UserAdapter.UserDTOToUser(newUser));
+                return Ok();
+            }
+        }
+
+/*        [HttpGet]
+        public IActionResult Login([FromBody] UserDTO newUser)
+        {
             UserService userService = new UserService();
-            userService.Register(UserAdapter.UserDTOToUser(newUser));
+            userService.FindUserByEmail(newUser.Email);
 
             return Ok();
-        }
+        }*/
     }
 }

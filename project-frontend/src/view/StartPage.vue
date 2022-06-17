@@ -96,23 +96,23 @@
 
               <div class="form-group">
                 <label for="name">Firstname</label>
-                <input  type="text" class="form-control" placeholder="Enter your firstname" v-model="firstname"/>
+                <input  type="text" class="form-control" placeholder="Enter your firstname" v-model="this.firstname"/>
                 <label for="name">Lastname</label>
-                <input type="text" class="form-control" placeholder="Enter your lastname" v-model="lastname"/>
+                <input type="text" class="form-control" placeholder="Enter your lastname" v-model="this.lastname"/>
                 <label for="name">Email </label>
-                <input type="text"  class="form-control" placeholder="Enter your email" v-model="email"/>
+                <input type="text"  class="form-control" placeholder="Enter your email" v-model="this.email"/>
                 <label for="name">Health card number</label>
-                <input type="text" class="form-control" placeholder="Enter your health card number" v-model="healthCardNumber"/>
+                <input type="text" class="form-control" placeholder="Enter your health card number" v-model="this.healthCardNumber"/>
               </div>
 
                <div class="form-group">
                 <label for="psw" ><span class="glyphicon glyphicon-eye-open" ></span> Password</label>
-                <input type="password"  class="form-control"   id="psw"  placeholder="Enter your password"  v-model="password"/>
+                <input type="password"  class="form-control"   id="psw"  placeholder="Enter your password"  v-model="this.password"/>
               </div>
               <div class="form-group"><label for="psw" ><span class="glyphicon glyphicon-eye-open" ></span> Password again</label >
-               <input type="password" class="form-control" id="psw" placeholder="Enter your password again" v-model="passwordAgain"/>
+               <input type="password" class="form-control" id="psw" placeholder="Enter your password again" v-model="this.passwordAgain"/>
               </div>
-              <button type="submit" @click="Register()"> <span></span> Submit </button>
+              <button type="submit" @click.prevent="Register()"> <span></span> Submit </button>
             </form>
           </div>
           <div class="modal-footer">
@@ -149,7 +149,46 @@ export default {
   },
 
   methods: {
+
 async Register() {
+      if (!this.validFirstname()) {
+            new Swal({
+              title:"Warning",
+              type: "warning",
+              text:'Firstname should be longer!',
+            });
+    }else if(!this.validLastname()) {
+            new Swal({
+              title:"Warning",
+              type: "warning",
+              text:'Lastname should be longer!',
+            });
+    }else if (!this.validPassword()) {
+             new Swal({
+              title:"Warning",
+              type: "warning",
+              text:'The code is not in good shape! The code must contain at least one lowercase, one uppercase letter, a special character and one number!',
+            });     
+    } else if (this.password != this.passwordAgain ) {
+            new Swal({
+             title:"Warning",
+             type: "warning",
+             text:'Passwords do not match!',
+           }); 
+   }else if(!this.validEmail()) {
+           new Swal({
+             title:"Warning",
+             type: "warning",
+             text:'The email is not in good shape!',
+           });
+    }
+    else {
+      console.log(this.firstname);
+       console.log(this.lastname);
+        console.log(this.email);
+         console.log(this.password);
+          console.log(this.healthCardNumber);
+           console.log( this.role);
       const headers ={
               'Content-Type': 'application/json;charset=UTF-8',
               Accept: 'application/json',
@@ -165,28 +204,63 @@ async Register() {
       ).then((res) => {
             console.log(res);
             new Swal({
-              title:"Uspesno",
+              title:"Success",
               type: "warning",
-              text:'Registracija je uspela!',
+              text:'You are registered!',
             });
-          })
-          .catch((error) => {
-            console.log(error.response.status);
-            if(error.response.status == 417) {
-            new Swal({
-              title:"Nije uspesno",
-              type: "warning",
-              text:'Postoji vec korisnik sa tim email-om!',
-            });
-            }else if (error.response.status == 409) {
-            new Swal({
-              title:"Nije uspesno",
-              type: "warning",
-              text:'Postoji vec korisnik sa tim username-om!',
-            });
-            }
-          });
+          })  .catch( error => {
+        if(error.response.status == 400) {
+         return new Swal({
+             title:"Warning",
+             type: "warning",
+             text:'User with this email already exists in system!'
+           });
         }
+
+      }) 
+        }
+    },
+            validFirstname() {
+      if (this.firstname.length < 1) {
+        return false;
+      }
+      return true;
+    },
+            validLastname() {
+      if (this.lastname.length < 1) {
+        return false;
+      }
+      return true;
+    },
+            validPassword() {
+      if (this.password.length < 8) {
+        return false;
+      } else if (this.password.length > 30) {
+        return false;
+      } else if (!this.password.match(/[a-z]/g)) {
+        return false;
+      } else if (!this.password.match(/[A-Z]/g)) {
+        return false;
+      } else if (!this.password.match(/[0-9]/g)) {
+        return false;
+      } else if (!this.password.match(/[!@#$%^&*.,:'+-/\\"]/g)) {
+        return false;
+      }
+      return true;
+    }, 
+        validEmail() {
+      if (
+        !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+          this.email
+        )
+      ) {
+        return false;
+      } else if (this.email.length > 35) {
+        return false;
+      }
+      return true;
+    }
+  
   },
 };
 </script>
