@@ -1,12 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using project_backend.Models;
 using project_backend.Repository;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace project_backend.Service
@@ -37,17 +41,26 @@ namespace project_backend.Service
 
         public bool IsUserExist(string email)
         {
-            Debug.WriteLine("Email koji se trazi je " + email);
             bool isExists = false;
             User u = _userRepository.FindUserByEmail(email);
             if (u != null) {
-                Debug.WriteLine("Nasli smo usera"+ u.Email + u.Firstname);
                 isExists = true;
             }
 
             return isExists;
         }
 
+        internal object Authenticate(string email, string passwordd)
+        {
+            User u = _userRepository.FindUserByEmail(email);
+            if (u == null) {
+                return u;
+            }
+            if (u.Passwordd != passwordd) {
+                u = null;
+            }
+                return u;
+        }
 
         public int GenerateId()
         {
@@ -55,11 +68,27 @@ namespace project_backend.Service
             return number;
         }
 
-        public void FindUserByEmail(string email) {
-           User u = _userRepository.FindUserByEmail(email);
-           Debug.WriteLine("User je" + u.Firstname);
+
+        public string GenerateToken(int userId)
+        {
+            var mySecret = "asdv234234^&%&^%&^hjsdfb2%%%";
+            var mySecurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(mySecret));
+            var myIssuer = "http://mysite.com";
+            var myAudience = "http://myaudience.com";
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+            new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
+                }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                Issuer = myIssuer,
+                Audience = myAudience,
+                SigningCredentials = new SigningCredentials(mySecurityKey, SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
-
-
     }
 }

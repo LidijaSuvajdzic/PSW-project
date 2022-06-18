@@ -38,3 +38,8 @@ C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-back
 C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-backend\project-backend\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
 C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-backend\project-backend\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-backend\project-backend\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-backend\project-backend\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-backend\project-backend\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-backend\project-backend\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-backend\project-backend\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-backend\project-backend\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll

@@ -42,13 +42,14 @@
             </h5>
           </div>
           <div class="modal-body" style="padding: 15px 50px">
-            <form role="form" @submit.prevent="Login">
+            <form role="form">
               <div class="form-group">
                 <label for="name">E-mail:</label>
                 <input
                   type="text"
                   class="form-control"
                   placeholder="Enter your email"
+                  v-model="this.email"
                 />
               </div>
               <div class="form-group">
@@ -61,10 +62,12 @@
                   class="form-control"
                   id="psw"
                   placeholder="Enter your password"
+                  v-model="this.password"
                 />
               </div>
               <button
                 type="submit"
+                @click.prevent="Login()"
               >
                 <span></span> Submit
               </button>
@@ -149,6 +152,31 @@ export default {
   },
 
   methods: {
+    async Login() {
+      console.log(this.email);
+      console.log(this.password);
+      const headers ={
+        "Content-type": "application/json",
+      }; 
+      axios.post("http://localhost:58025/api/user/login",{ Email: this.email, Passwordd: this.password }, {headers})
+      .then (response => {
+          console.log(response.data)
+          localStorage.setItem("userId",response.data.Id);
+          localStorage.setItem("role",response.data.Role);
+          localStorage.setItem("firstname",response.data.FirstName);
+          localStorage.setItem("lastname",response.data.LastName);
+          localStorage.setItem("token",response.data.Token);
+      })
+      .catch( error => {
+        if (error.response.status == 400) {
+         return new Swal({
+             title:"Warning",
+             type: "warning",
+             text:'Username or password are incorect!'
+           });}
+      }) 
+    },
+
 
 async Register() {
       if (!this.validFirstname()) {

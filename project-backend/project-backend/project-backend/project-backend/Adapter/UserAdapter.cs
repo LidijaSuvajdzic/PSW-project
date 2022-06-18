@@ -24,7 +24,9 @@ namespace project_backend.Adapter
             public static UserDTO UserToUserDTO(User user)
             {
             UserDTO dto = new UserDTO();
-            dto.UserId = user.UserId;
+            if (user.UserId != null) {
+                dto.UserId = user.UserId;
+            }
             dto.Firstname = user.Firstname;
             dto.Lastname = user.Lastname;
             dto.Email = user.Email;

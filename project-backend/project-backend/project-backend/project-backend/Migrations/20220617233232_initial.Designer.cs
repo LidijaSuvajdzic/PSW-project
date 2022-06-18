@@ -9,8 +9,8 @@ using project_backend.Models;
 namespace project_backend.Migrations
 {
     [DbContext(typeof(MyWebApiContext))]
-    [Migration("20220616182706_firsttt")]
-    partial class firsttt
+    [Migration("20220617233232_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,23 +23,30 @@ namespace project_backend.Migrations
             modelBuilder.Entity("project_backend.Models.User", b =>
                 {
                     b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("userid");
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .HasColumnName("email");
 
-                    b.Property<string>("Firstname");
+                    b.Property<string>("Firstname")
+                        .HasColumnName("firstname");
 
-                    b.Property<int>("HealthCardNumber");
+                    b.Property<int>("HealthCardNumber")
+                        .HasColumnName("healthcardnumber");
 
-                    b.Property<string>("Lastname");
+                    b.Property<string>("Lastname")
+                        .HasColumnName("lastname");
 
-                    b.Property<string>("Passwordd");
+                    b.Property<string>("Passwordd")
+                        .HasColumnName("password");
 
-                    b.Property<string>("Role");
+                    b.Property<string>("Role")
+                        .HasColumnName("role");
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users");
+                    b.ToTable("users");
 
                     b.HasData(
                         new
