@@ -10,6 +10,7 @@ namespace project_backend.Models
     {
         public MyWebApiContext(DbContextOptions<MyWebApiContext> options) : base(options) { }
         public DbSet<User> users { get; set; }
+        public DbSet<FreeAppointment> freeAppointments { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasData(
@@ -19,6 +20,47 @@ namespace project_backend.Models
                 new User { UserId = 4, Firstname = "Simonida", Lastname = "Simic", Email = "simonidasimic@gmail.com", Passwordd = "1234567890", HealthCardNumber = 0982222321, Role = "DOCTOR" }
 
             );
+
+            modelBuilder.Entity<FreeAppointment>().HasData(
+                new FreeAppointment
+                {
+                    Id = 1,
+                    DateFrom = DateTime.ParseExact("2022-06-20 13:00:00", "yyyy-MM-dd HH:mm:ss",
+                                       System.Globalization.CultureInfo.InvariantCulture),
+                    DateTo = DateTime.ParseExact("2022-06-20 14:00:00", "yyyy-MM-dd HH:mm:ss",
+                                       System.Globalization.CultureInfo.InvariantCulture),
+                    DoctorId = 2
+                },
+                new FreeAppointment
+                {
+                    Id = 2,
+                    DateFrom = DateTime.ParseExact("2022-06-20 14:00:00", "yyyy-MM-dd HH:mm:ss",
+                                       System.Globalization.CultureInfo.InvariantCulture),
+                    DateTo = DateTime.ParseExact("2022-06-20 15:00:00", "yyyy-MM-dd HH:mm:ss",
+                                       System.Globalization.CultureInfo.InvariantCulture),
+                    DoctorId = 2
+                },
+                new FreeAppointment
+                {
+                    Id = 3,
+                    DateFrom = DateTime.ParseExact("2022-06-20 15:00:00", "yyyy-MM-dd HH:mm:ss",
+                                       System.Globalization.CultureInfo.InvariantCulture),
+                    DateTo = DateTime.ParseExact("2022-06-20 16:00:00", "yyyy-MM-dd HH:mm:ss",
+                                       System.Globalization.CultureInfo.InvariantCulture),
+                    DoctorId = 3
+                },
+                new FreeAppointment
+                {
+                    Id = 4,
+                    DateFrom = DateTime.ParseExact("2022-06-20 15:00:00", "yyyy-MM-dd HH:mm:ss",
+                                       System.Globalization.CultureInfo.InvariantCulture),
+                    DateTo = DateTime.ParseExact("2022-06-20 16:00:00", "yyyy-MM-dd HH:mm:ss",
+                                       System.Globalization.CultureInfo.InvariantCulture),
+                    DoctorId = 4
+                }
+            ); ;
         }
     }
 }
+
+

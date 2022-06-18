@@ -1,5 +1,5 @@
 <template>
-<div>CAOOOOOOOOOOOOOOOOOOOO</div>
+<div><button @click="MakeAnAppointment()">Make an appointment</button></div>
 </template>
 
 <script>
@@ -18,6 +18,10 @@ export default {
       const res = await fetch("http://localhost:58025/api/user/findAllDoctors");
       const data = await res.json();
       return data;   
+    },
+    async MakeAnAppointment() {
+ this.$router.push({ name: "MakeAnAppointment" });
+
     }
   },
   async created() {

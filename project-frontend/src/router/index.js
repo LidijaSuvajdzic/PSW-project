@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import StartPage from "../view/StartPage"
 import StartPagePatient from "../view/patient/StartPagePatient"
-
+import MakeAnAppointment from "../view/patient/MakeAnAppointment"
 const routes = [
   {
     path: "/",
@@ -13,6 +13,11 @@ const routes = [
     path: "/StartPagePatient",
     name: "StartPagePatient",
     component: StartPagePatient,
+  },
+  {
+    path: "/MakeAnAppointment",
+    name: "MakeAnAppointment",
+    component: MakeAnAppointment,
   },
 ];
 
