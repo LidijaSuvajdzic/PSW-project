@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using project_backend.Adapter;
+using project_backend.DTO;
 using project_backend.Models;
 using project_backend.Repository;
 using System;
@@ -64,9 +66,20 @@ namespace project_backend.Service
 
         public int GenerateId()
         {
-            int number= _userRepository.GetAllEmployee().Count + 1;
+            int number= _userRepository.GetAllUsers().Count + 1;
             return number;
         }
+
+
+        public List<UserDTO> FindUsersByRole(string role) {
+            List<User> users = _userRepository.FindUsersByRole(role);
+            List<UserDTO> userDTOs = new List<UserDTO>();
+            foreach (User u in users) {
+                userDTOs.Add(UserAdapter.UserToUserDTO(u));
+            }
+            return userDTOs;
+        }
+
 
 
         public string GenerateToken(int userId)

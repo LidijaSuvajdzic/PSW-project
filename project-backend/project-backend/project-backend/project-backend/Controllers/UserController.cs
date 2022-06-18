@@ -1,21 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Npgsql;
 using project_backend.Adapter;
 using project_backend.DTO;
 using project_backend.Service;
-using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.IdentityModel.Tokens.Jwt;
-using System.IO;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
+
 
 namespace project_backend.Controllers
 {
@@ -70,6 +60,18 @@ namespace project_backend.Controllers
                 LastName = userDTO.Lastname,
                 Token = tokenString
             });
+        }
+
+        [AllowAnonymous]
+        [Route("findAllDoctors")]
+        [HttpGet]
+        public IActionResult findAllDoctors()
+        {
+            UserService userService = new UserService();
+            string role = "DOCTOR";
+            List<UserDTO> usersDTO = userService.FindUsersByRole(role);
+
+            return Ok(usersDTO);
         }
     }
 }

@@ -33,8 +33,17 @@ namespace project_backend.Repository
             return student;
         }
 
+        public List<User> FindUsersByRole(string role)
+        {
 
-        public List<User> GetAllEmployee()
+            List<User> users = (from s in _context.users
+                           where s.Role == role
+                           select s).ToList();
+            return users;
+        }
+
+
+        public List<User> GetAllUsers()
         {
             return _context.users.ToList();
         }

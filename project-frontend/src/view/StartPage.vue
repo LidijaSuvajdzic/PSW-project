@@ -27,8 +27,10 @@
   </nav>
 <img src="https://www.securitymagazine.com/ext/resources/secenews/2018/hosp-900.jpg?1515062945" alt="Trulli" />
 
-      <!--Modal prijava-->
-    <div class="modal fade" id="login" role="dialog">
+
+
+
+ <div class="modal fade" id="login" role="dialog">
       <div class="modal-dialog">
         <!-- Modal content -->
         <div class="modal-content">
@@ -38,38 +40,38 @@
               id="exampleModalLabel"
               style="color: #0b4025; padding: 5px 35px"
             >
-              Login
+              Prijavljivanje
             </h5>
           </div>
           <div class="modal-body" style="padding: 15px 50px">
-            <form role="form">
+            <form role="form" @submit.prevent="Login">
               <div class="form-group">
                 <label for="name">E-mail:</label>
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="Enter your email"
-                  v-model="this.email"
+                  placeholder="Unesite Vas e-mail"
+                  v-model="email"
                 />
               </div>
               <div class="form-group">
                 <label for="psw"
                   ><span class="glyphicon glyphicon-eye-open"></span>
-                  Password:</label
+                  Lozinka:</label
                 >
                 <input
                   type="password"
                   class="form-control"
                   id="psw"
-                  placeholder="Enter your password"
-                  v-model="this.password"
+                  placeholder="Unesite lozinku"
+                  v-model="password"
                 />
               </div>
               <button
                 type="submit"
-                @click.prevent="Login()"
+                @click="Login()"
               >
-                <span></span> Submit
+                <span></span>Login
               </button>
             </form>
           </div>
@@ -84,6 +86,15 @@
         </div>
       </div>
     </div>
+
+
+
+
+
+
+
+
+
 
     <!-- Modal registracija-->
     <div class="modal fade" id="signup" role="dialog">
@@ -166,15 +177,18 @@ export default {
           localStorage.setItem("firstname",response.data.FirstName);
           localStorage.setItem("lastname",response.data.LastName);
           localStorage.setItem("token",response.data.Token);
+          this.$router.push({ name: "StartPagePatient" });
+          this.$router.go(0);
       })
-      .catch( error => {
+      .catch( function (error) {
         if (error.response.status == 400) {
          return new Swal({
              title:"Warning",
              type: "warning",
              text:'Username or password are incorect!'
            });}
-      }) 
+      })
+              
     },
 
 
