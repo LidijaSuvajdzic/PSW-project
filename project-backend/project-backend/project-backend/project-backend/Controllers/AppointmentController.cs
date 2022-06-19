@@ -73,5 +73,26 @@ namespace project_backend.Controllers
             appointmentService.addAppointmentFromTable(id,patient);
             return Ok();
         }
+
+        [HttpGet]
+        [Route("findPreviousAppointments/{firstname}")]
+        public IActionResult findPreviousAppointments(String firstname)
+        {
+            Debug.WriteLine("ime je" + firstname);
+            AppointmentService appointmentService = new AppointmentService();
+            List<ReservedAppointmentDTO> lists = appointmentService.findMyPreviousAppointments(firstname);
+            return Ok(lists);
+        }
+
+        [HttpGet]
+        [Route("findFutureAppointments/{firstname}")]
+        public IActionResult findFutureAppointments(String firstname)
+        {
+            Debug.WriteLine("ime je" + firstname);
+            AppointmentService appointmentService = new AppointmentService();
+            List<ReservedAppointmentDTO> lists = appointmentService.findMyFutureAppointments(firstname);
+            return Ok(lists);
+        }
+
     }
 }

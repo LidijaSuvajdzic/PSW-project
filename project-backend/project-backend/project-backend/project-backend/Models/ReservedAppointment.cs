@@ -19,5 +19,7 @@ namespace project_backend.Models
         public int DoctorId { get; set; }
         [Column("patientId")]
         public int PatientId { get; set; }
+        [Column("isRated")]
+        public bool IsRated { get; set; }
     }
 }

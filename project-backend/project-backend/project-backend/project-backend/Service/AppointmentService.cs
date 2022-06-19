@@ -77,8 +77,8 @@ namespace project_backend.Service
             reservedAppointment.DoctorId = doctor.UserId;
             reservedAppointment.PatientId = patient.UserId;
             reservedAppointment.Id = GenerateId();
-
-           FreeAppointment fa =  _appointmentRepository.findAppoinment(dateFrom, dateTo, doctor.UserId);
+            reservedAppointment.IsRated = false;
+            FreeAppointment fa =  _appointmentRepository.findAppoinment(dateFrom, dateTo, doctor.UserId);
             fa.IsFree = false;
             _appointmentRepository.UpdateFreeAppointment(fa);
             _appointmentRepository.AddAppointment(reservedAppointment);
@@ -97,7 +97,7 @@ namespace project_backend.Service
             ra.DoctorId = fa.DoctorId;
             User p = _userRepository.FindUserByFirstname(patient);
             ra.PatientId = p.UserId;
-
+            ra.IsRated = false;
             _appointmentRepository.AddAppointment(ra);
             fa.IsFree = false;
             _appointmentRepository.UpdateFreeAppointment(fa);
@@ -198,7 +198,42 @@ namespace project_backend.Service
             }
             return freeAppointmentDTOs;
         }
+
+        public List<ReservedAppointmentDTO> findMyFutureAppointments(String firstname)
+        {
+            User u = _userRepository.FindUserByFirstname(firstname);
+            List<ReservedAppointment> lists = _appointmentRepository.findMyFutureAppointments(DateTime.Now, u.UserId);
+            List<ReservedAppointmentDTO> listsDTO = new List<ReservedAppointmentDTO>();
+            foreach (ReservedAppointment ra in lists) {
+                ReservedAppointmentDTO raDTO = ReservedAppointmentAdapter.ReservedAppointmentToReservedAppointmentDTO(ra);
+                User doctor = _userRepository.FindUserById(ra.DoctorId);
+                raDTO.Doctor = doctor.Firstname + " " + doctor.Lastname;
+                listsDTO.Add(raDTO);
+            }
+
+        return listsDTO;
+        }
+
+        public List<ReservedAppointmentDTO> findMyPreviousAppointments(String firstname)
+        {
+            User u = _userRepository.FindUserByFirstname(firstname);
+            List<ReservedAppointment> lists = _appointmentRepository.findMyPreviousAppointments(DateTime.Now,u.UserId);
+            List<ReservedAppointmentDTO> listsDTO = new List<ReservedAppointmentDTO>();
+            foreach (ReservedAppointment ra in lists)
+            {
+                ReservedAppointmentDTO raDTO = ReservedAppointmentAdapter.ReservedAppointmentToReservedAppointmentDTO(ra);
+                User doctor = _userRepository.FindUserById(ra.DoctorId);
+                raDTO.Doctor = doctor.Firstname + " " + doctor.Lastname;
+                listsDTO.Add(raDTO);
+            }
+            return listsDTO;
+        }
+
     }
+
+
+
+
 }
 
 

@@ -38,20 +38,22 @@ export default {
         return {
             appointments: "",
             appointment: { Id: 0, DateFrom: "", DateTo: "", DoctorsFirstname: "", DoctorsLastname: "" },
+            firstname:""
         };
     },
     methods: {
-        async getAllDoctors() {
-            const res = await fetch("http://localhost:58025/api/user/findAllDoctors");
-            const data = await res.json();
-            return data;
+        async findFutureAppointments() {
+    this.firstname = localStorage.getItem("firstname");
+      const res = await fetch("http://localhost:58025/api/appointment/findFutureAppointments/"+this.firstname);
+      const data = await res.json();
+      return data;   
         },
         async GoBack(){
             this.$router.push({ name: "StartPagePatient" });
         }
     },
     async created() {
-        //this.appointments = await this.getAllDoctors();
+        this.appointments= await this.findFutureAppointments();
     },
 };
 </script>

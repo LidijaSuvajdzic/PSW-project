@@ -4,13 +4,13 @@
     <form>
         <div class="form-group">
             <label for="name">Date from:</label>
-            <input type="date" class="form-control" v-model="dateFrom" :disabled="isDoctor"/>
-             <input type="time" class="form-control" v-model="timeFrom" :disabled="isDoctor"/>
+            <input type="date" class="form-control" v-model="dateFrom" :disabled="isDoctor==false"/>
+             <input type="time" class="form-control" v-model="timeFrom" :disabled="isDoctor==false"/>
             <label for="name">Date to:</label>
-            <input type="date" class="form-control" v-model="dateTo" :disabled="isDoctor"/>
-            <input type="time" class="form-control" v-model="timeTo" :disabled="isDoctor"/>
+            <input type="date" class="form-control" v-model="dateTo" :disabled="isDoctor==false"/>
+            <input type="time" class="form-control" v-model="timeTo" :disabled="isDoctor==false"/>
             <label for="name">Pick doctor:</label>
-            <select class="form-control" name="template" v-model="selectedDoctor" :disabled="isDoctor==false">
+            <select class="form-control" name="template" v-model="selectedDoctor" :disabled="isDoctor==true">
                       <option v-for="(user , index) in doctors" v-bind:key="index"  >
                             {{user.Firstname}} {{user.Lastname}}
                       </option>

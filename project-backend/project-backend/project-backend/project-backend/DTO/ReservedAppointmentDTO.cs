@@ -7,6 +7,9 @@ namespace project_backend.DTO
 {
     public class ReservedAppointmentDTO
     {
+        public bool IsRated;
+
+        public int Id { get; set; }
         public String DateFrom { get; set; }
         public String DateTo { get; set; }
         public String TimeFrom { get; set; }

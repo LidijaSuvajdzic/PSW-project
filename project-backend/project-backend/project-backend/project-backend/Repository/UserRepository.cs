@@ -51,7 +51,13 @@ namespace project_backend.Repository
             return users;
         }
 
-
+        internal User FindUserById(int doctorId)
+        {
+            User user= (from s in _context.users
+                                where s.UserId == doctorId
+                                select s).FirstOrDefault<User>();
+            return user;
+        }
         public List<User> GetAllUsers()
         {
             return _context.users.ToList();
@@ -79,5 +85,7 @@ namespace project_backend.Repository
 
             GC.SuppressFinalize(this);
         }
+
+
     }
 }

@@ -10,8 +10,8 @@ using project_backend.Models;
 namespace project_backend.Migrations
 {
     [DbContext(typeof(MyWebApiContext))]
-    [Migration("20220619142834_newOne")]
-    partial class newOne
+    [Migration("20220619202701_again")]
+    partial class again
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,26 @@ namespace project_backend.Migrations
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            modelBuilder.Entity("project_backend.Models.AppointmentFeedback", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id");
+
+                    b.Property<int>("Comment")
+                        .HasColumnName("comment");
+
+                    b.Property<int>("Grade")
+                        .HasColumnName("grade");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnName("patientId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("appointmentFeedbacks");
+                });
 
             modelBuilder.Entity("project_backend.Models.FreeAppointment", b =>
                 {
@@ -75,6 +95,14 @@ namespace project_backend.Migrations
                             DateTo = new DateTime(2022, 6, 20, 16, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorId = 4,
                             IsFree = true
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DateFrom = new DateTime(2022, 3, 20, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateTo = new DateTime(2022, 3, 20, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 2,
+                            IsFree = true
                         });
                 });
 
@@ -92,6 +120,9 @@ namespace project_backend.Migrations
 
                     b.Property<int>("DoctorId")
                         .HasColumnName("doctorId");
+
+                    b.Property<bool>("IsRated")
+                        .HasColumnName("isRated");
 
                     b.Property<int>("PatientId")
                         .HasColumnName("patientId");

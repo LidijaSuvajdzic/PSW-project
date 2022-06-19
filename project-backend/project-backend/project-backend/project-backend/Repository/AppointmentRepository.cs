@@ -54,11 +54,24 @@ namespace project_backend.Repository
             return fa;
         }
 
+        public ReservedAppointment findAppointmentById( int id)
+        {
+            ReservedAppointment ap = (from s in _context.reservedAppointments
+                                               where s.Id == id
+                                               select s).FirstOrDefault<ReservedAppointment>();
+            return ap;
+        }
         public FreeAppointment find(int id)
         {
             FreeAppointment fa = (from s in _context.freeAppointments
                                   where s.Id==id
                                   select s).FirstOrDefault<FreeAppointment>(); ;
+            return fa;
+        }
+
+        public ReservedAppointment findReservedAppointment(int id)
+        {
+            ReservedAppointment fa = _context.reservedAppointments.Find(id);
             return fa;
         }
 
@@ -69,6 +82,24 @@ namespace project_backend.Repository
                                            select s).ToList();
             return lists;
         }
+
+
+        public List<ReservedAppointment> findMyFutureAppointments(DateTime dateNow,int id)
+        {
+            List<ReservedAppointment> lists = (from s in _context.reservedAppointments
+                                           where s.DateFrom>=dateNow && s.PatientId==id
+                                           select s).ToList();
+            return lists;
+        }
+
+        public List<ReservedAppointment> findMyPreviousAppointments(DateTime dateNow, int id)
+        {
+            List<ReservedAppointment> lists = (from s in _context.reservedAppointments
+                                               where s.DateTo <= dateNow && s.PatientId == id
+                                               select s).ToList();
+            return lists;
+        }
+
 
         public List<FreeAppointment> findAppoinmentsByDate(DateTime dateFrom, DateTime dateTo)
         {
@@ -102,6 +133,16 @@ namespace project_backend.Repository
             }
         }
 
+        
+
+        public void UpdateReservedAppointment(ReservedAppointment reservedAppointment)
+        {
+            if (reservedAppointment != null)
+            {
+                _context.reservedAppointments.Update(reservedAppointment);
+                _context.SaveChanges();
+            }
+        }
     }
 }
 

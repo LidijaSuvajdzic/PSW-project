@@ -1,34 +1,32 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace project_backend.Migrations
 {
-    public partial class newOne : Migration
+    public partial class again : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "reservedAppointment",
+                name: "appointmentFeedbacks",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    dateFrom = table.Column<DateTime>(nullable: false),
-                    dateTo = table.Column<DateTime>(nullable: false),
-                    doctorId = table.Column<int>(nullable: false),
-                    patientId = table.Column<int>(nullable: false)
+                    patientId = table.Column<int>(nullable: false),
+                    grade = table.Column<int>(nullable: false),
+                    comment = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_reservedAppointment", x => x.id);
+                    table.PrimaryKey("PK_appointmentFeedbacks", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "reservedAppointment");
+                name: "appointmentFeedbacks");
         }
     }
 }

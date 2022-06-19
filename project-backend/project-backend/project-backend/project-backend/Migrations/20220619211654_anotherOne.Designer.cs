@@ -10,8 +10,8 @@ using project_backend.Models;
 namespace project_backend.Migrations
 {
     [DbContext(typeof(MyWebApiContext))]
-    [Migration("20220618230512_second1")]
-    partial class second1
+    [Migration("20220619211654_anotherOne")]
+    partial class anotherOne
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,29 @@ namespace project_backend.Migrations
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            modelBuilder.Entity("project_backend.Models.AppointmentFeedback", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id");
+
+                    b.Property<int>("AppointmentId")
+                        .HasColumnName("appointmentId");
+
+                    b.Property<int>("Comment")
+                        .HasColumnName("comment");
+
+                    b.Property<int>("Grade")
+                        .HasColumnName("grade");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnName("patientId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("appointmentFeedbacks");
+                });
 
             modelBuilder.Entity("project_backend.Models.FreeAppointment", b =>
                 {
@@ -36,6 +59,9 @@ namespace project_backend.Migrations
                     b.Property<int>("DoctorId")
                         .HasColumnName("doctorId");
 
+                    b.Property<bool>("IsFree")
+                        .HasColumnName("isFree");
+
                     b.HasKey("Id");
 
                     b.ToTable("freeAppointment");
@@ -46,29 +72,67 @@ namespace project_backend.Migrations
                             Id = 1,
                             DateFrom = new DateTime(2022, 6, 20, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             DateTo = new DateTime(2022, 6, 20, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = 2
+                            DoctorId = 2,
+                            IsFree = true
                         },
                         new
                         {
                             Id = 2,
                             DateFrom = new DateTime(2022, 6, 20, 14, 0, 0, 0, DateTimeKind.Unspecified),
                             DateTo = new DateTime(2022, 6, 20, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = 2
+                            DoctorId = 2,
+                            IsFree = true
                         },
                         new
                         {
                             Id = 3,
                             DateFrom = new DateTime(2022, 6, 20, 15, 0, 0, 0, DateTimeKind.Unspecified),
                             DateTo = new DateTime(2022, 6, 20, 16, 0, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = 3
+                            DoctorId = 3,
+                            IsFree = true
                         },
                         new
                         {
                             Id = 4,
                             DateFrom = new DateTime(2022, 6, 20, 15, 0, 0, 0, DateTimeKind.Unspecified),
                             DateTo = new DateTime(2022, 6, 20, 16, 0, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = 4
+                            DoctorId = 4,
+                            IsFree = true
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DateFrom = new DateTime(2022, 3, 20, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateTo = new DateTime(2022, 3, 20, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 2,
+                            IsFree = true
                         });
+                });
+
+            modelBuilder.Entity("project_backend.Models.ReservedAppointment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("DateFrom")
+                        .HasColumnName("dateFrom");
+
+                    b.Property<DateTime>("DateTo")
+                        .HasColumnName("dateTo");
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnName("doctorId");
+
+                    b.Property<bool>("IsRated")
+                        .HasColumnName("isRated");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnName("patientId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("reservedAppointment");
                 });
 
             modelBuilder.Entity("project_backend.Models.User", b =>
