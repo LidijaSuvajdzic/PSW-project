@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using project_backend.Models;
@@ -9,9 +10,10 @@ using project_backend.Models;
 namespace project_backend.Migrations
 {
     [DbContext(typeof(MyWebApiContext))]
-    partial class MyWebApiContextModelSnapshot : ModelSnapshot
+    [Migration("20220619130443_third")]
+    partial class third
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,29 +76,6 @@ namespace project_backend.Migrations
                             DoctorId = 4,
                             IsFree = true
                         });
-                });
-
-            modelBuilder.Entity("project_backend.Models.ReservedAppointment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("id");
-
-                    b.Property<DateTime>("DateFrom")
-                        .HasColumnName("dateFrom");
-
-                    b.Property<DateTime>("DateTo")
-                        .HasColumnName("dateTo");
-
-                    b.Property<int>("DoctorId")
-                        .HasColumnName("doctorId");
-
-                    b.Property<int>("PatientId")
-                        .HasColumnName("patientId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("reservedAppointment");
                 });
 
             modelBuilder.Entity("project_backend.Models.User", b =>

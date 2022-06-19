@@ -7,6 +7,7 @@ namespace project_backend.DTO
 {
     public class FreeAppointmentDTO
     {
+        public int Id { get; set; }
         public String DateFrom { get; set; }
         public String DateTo { get; set; }
 

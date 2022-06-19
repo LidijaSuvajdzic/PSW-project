@@ -54,5 +54,24 @@ namespace project_backend.Controllers
                 return Ok(freeAppointmentDTOs);
             }
         }
+
+        [HttpPost]
+        [Route("addAppointment")]
+        public IActionResult addAppointment([FromBody] ReservedAppointmentDTO reservedAppointmentDTO)
+        {
+            AppointmentService appointmentService = new AppointmentService();
+            appointmentService.addAppointment(reservedAppointmentDTO);
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("addAppointmentFromTable/{id}/{patient}")]
+        public IActionResult addAppointmentFromTable(int id,String patient)
+        {
+            Debug.WriteLine("ispisi id"+id);
+            AppointmentService appointmentService = new AppointmentService();
+            appointmentService.addAppointmentFromTable(id,patient);
+            return Ok();
+        }
     }
 }

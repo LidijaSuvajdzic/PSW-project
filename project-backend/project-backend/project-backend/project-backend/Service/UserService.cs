@@ -38,7 +38,7 @@ namespace project_backend.Service
         public void Register(User user)
         {
             user.UserId = GenerateId();
-            _userRepository.AddEmployee(user);
+            _userRepository.AddUser(user);
         }
 
         public bool IsUserExist(string email)

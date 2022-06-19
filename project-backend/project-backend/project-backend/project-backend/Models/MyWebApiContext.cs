@@ -11,6 +11,7 @@ namespace project_backend.Models
         public MyWebApiContext(DbContextOptions<MyWebApiContext> options) : base(options) { }
         public DbSet<User> users { get; set; }
         public DbSet<FreeAppointment> freeAppointments { get; set; }
+        public DbSet<ReservedAppointment> reservedAppointments { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasData(
@@ -29,7 +30,8 @@ namespace project_backend.Models
                                        System.Globalization.CultureInfo.InvariantCulture),
                     DateTo = DateTime.ParseExact("2022-06-20 14:00:00", "yyyy-MM-dd HH:mm:ss",
                                        System.Globalization.CultureInfo.InvariantCulture),
-                    DoctorId = 2
+                    DoctorId = 2,
+                    IsFree= true
                 },
                 new FreeAppointment
                 {
@@ -38,7 +40,8 @@ namespace project_backend.Models
                                        System.Globalization.CultureInfo.InvariantCulture),
                     DateTo = DateTime.ParseExact("2022-06-20 15:00:00", "yyyy-MM-dd HH:mm:ss",
                                        System.Globalization.CultureInfo.InvariantCulture),
-                    DoctorId = 2
+                    DoctorId = 2,
+                    IsFree = true
                 },
                 new FreeAppointment
                 {
@@ -47,7 +50,8 @@ namespace project_backend.Models
                                        System.Globalization.CultureInfo.InvariantCulture),
                     DateTo = DateTime.ParseExact("2022-06-20 16:00:00", "yyyy-MM-dd HH:mm:ss",
                                        System.Globalization.CultureInfo.InvariantCulture),
-                    DoctorId = 3
+                    DoctorId = 3,
+                    IsFree = true
                 },
                 new FreeAppointment
                 {
@@ -56,7 +60,8 @@ namespace project_backend.Models
                                        System.Globalization.CultureInfo.InvariantCulture),
                     DateTo = DateTime.ParseExact("2022-06-20 16:00:00", "yyyy-MM-dd HH:mm:ss",
                                        System.Globalization.CultureInfo.InvariantCulture),
-                    DoctorId = 4
+                    DoctorId = 4,
+                    IsFree = true
                 }
             ); ;
         }

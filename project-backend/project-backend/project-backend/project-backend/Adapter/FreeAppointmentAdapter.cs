@@ -13,9 +13,12 @@ namespace project_backend.Adapter
         public static FreeAppointmentDTO FreeAppointmentToFreeAppointmentDTO(FreeAppointment freeAppointment)
         {
             FreeAppointmentDTO dto = new FreeAppointmentDTO();
+            dto.Id = freeAppointment.Id;
             dto.DateFrom = freeAppointment.DateFrom.ToString();
             dto.DateTo = freeAppointment.DateTo.ToString();
             return dto;
         }
+
+
     }
 }

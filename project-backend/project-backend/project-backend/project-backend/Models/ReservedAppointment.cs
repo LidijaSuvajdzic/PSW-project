@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace project_backend.Models
 {
-    [Table("freeAppointment")]
-    public class FreeAppointment
+    [Table("reservedAppointment")]
+    public class ReservedAppointment
     {
         [Column("id")]
         public int Id { get; set; }
@@ -17,7 +17,7 @@ namespace project_backend.Models
         public DateTime DateTo { get; set; }
         [Column("doctorId")]
         public int DoctorId { get; set; }
-        [Column("isFree")]
-        public bool IsFree { get; set; }
+        [Column("patientId")]
+        public int PatientId { get; set; }
     }
 }

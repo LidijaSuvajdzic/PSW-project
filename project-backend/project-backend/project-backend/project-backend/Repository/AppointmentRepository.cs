@@ -41,16 +41,31 @@ namespace project_backend.Repository
         internal List<FreeAppointment> findAppoinments(DateTime dateFrom, DateTime dateTo, int id)
         {
             List < FreeAppointment > lists = (from s in _context.freeAppointments
-                           where s.DoctorId == id && s.DateFrom<=dateFrom && s.DateTo>=dateTo
+                           where s.DoctorId == id && s.DateFrom<=dateFrom && s.DateTo>=dateTo && s.IsFree==true
                            select s).ToList();
             return lists;
         }
 
+        public FreeAppointment findAppoinment(DateTime dateFrom, DateTime dateTo, int id)
+        {
+            FreeAppointment fa = (from s in _context.freeAppointments
+                                           where s.DoctorId == id && s.DateFrom <= dateFrom && s.DateTo >= dateTo && s.IsFree == true
+                                           select s).FirstOrDefault<FreeAppointment>(); ;
+            return fa;
+        }
+
+        public FreeAppointment find(int id)
+        {
+            FreeAppointment fa = (from s in _context.freeAppointments
+                                  where s.Id==id
+                                  select s).FirstOrDefault<FreeAppointment>(); ;
+            return fa;
+        }
 
         public List<FreeAppointment> findAppoinmentsByDoctor(int id)
         {
             List<FreeAppointment> lists = (from s in _context.freeAppointments
-                                           where s.DoctorId == id
+                                           where s.DoctorId == id && s.IsFree == true
                                            select s).ToList();
             return lists;
         }
@@ -58,10 +73,35 @@ namespace project_backend.Repository
         public List<FreeAppointment> findAppoinmentsByDate(DateTime dateFrom, DateTime dateTo)
         {
             List<FreeAppointment> lists = (from s in _context.freeAppointments
-                                           where s.DateFrom >= dateFrom && s.DateTo <= dateTo
+                                           where s.DateFrom >= dateFrom && s.DateTo <= dateTo && s.IsFree == true
                                            select s).ToList();
             return lists;
         }
+
+
+        public List<ReservedAppointment> GetAllReservedAppointments()
+        {
+            return _context.reservedAppointments.ToList();
+        }
+
+        public void AddAppointment(ReservedAppointment reservedAppointment)
+        {
+            if (reservedAppointment != null)
+            {
+                _context.reservedAppointments.Add(reservedAppointment);
+                _context.SaveChanges();
+            }
+        }
+
+        public void UpdateFreeAppointment(FreeAppointment freeAppointment)
+        {
+            if (freeAppointment != null)
+            {
+                _context.freeAppointments.Update(freeAppointment);
+                _context.SaveChanges();
+            }
+        }
+
     }
 }
 

@@ -48,8 +48,7 @@ namespace project_backend.Service
             DateTime dateTo = DateTime.ParseExact(dateto, "yyyy-MM-dd HH:mm:ss",
                                        System.Globalization.CultureInfo.InvariantCulture);
 
-
-           List<FreeAppointment> freeAppointments = _appointmentRepository.findAppoinments(dateFrom,dateTo,user.UserId);
+            List<FreeAppointment> freeAppointments = _appointmentRepository.findAppoinments(dateFrom,dateTo,user.UserId);
             if (freeAppointments.Count==0)
             {
                 message = "No appointments found";
@@ -61,6 +60,54 @@ namespace project_backend.Service
             return message;
         }
 
+        public void addAppointment(ReservedAppointmentDTO reservedAppointmentDTO)
+        {
+            String datefrom = reservedAppointmentDTO.DateFrom + " " + reservedAppointmentDTO.TimeFrom + ":00";
+            String dateto = reservedAppointmentDTO.DateTo + " " + reservedAppointmentDTO.TimeTo + ":00";
+
+            DateTime dateFrom = DateTime.ParseExact(datefrom, "yyyy-MM-dd HH:mm:ss",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+            DateTime dateTo = DateTime.ParseExact(dateto, "yyyy-MM-dd HH:mm:ss",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+
+            String nameOfDoctor = reservedAppointmentDTO.Doctor.Split(" ")[0];
+            User doctor = _userRepository.FindUserByFirstname(nameOfDoctor);
+            User patient = _userRepository.FindUserByFirstname(reservedAppointmentDTO.Patient);
+            ReservedAppointment reservedAppointment = ReservedAppointmentAdapter.ReservedAppointmentDTOToReservedAppointment(reservedAppointmentDTO);
+            reservedAppointment.DoctorId = doctor.UserId;
+            reservedAppointment.PatientId = patient.UserId;
+            reservedAppointment.Id = GenerateId();
+
+           FreeAppointment fa =  _appointmentRepository.findAppoinment(dateFrom, dateTo, doctor.UserId);
+            fa.IsFree = false;
+            _appointmentRepository.UpdateFreeAppointment(fa);
+            _appointmentRepository.AddAppointment(reservedAppointment);
+        }
+
+        public void addAppointmentFromTable(int id,String patient)
+        {
+
+
+            FreeAppointment fa = _appointmentRepository.find(id);
+
+            ReservedAppointment ra = new ReservedAppointment();
+            ra.Id = GenerateId();
+            ra.DateFrom = fa.DateFrom;
+            ra.DateTo = fa.DateTo;
+            ra.DoctorId = fa.DoctorId;
+            User p = _userRepository.FindUserByFirstname(patient);
+            ra.PatientId = p.UserId;
+
+            _appointmentRepository.AddAppointment(ra);
+            fa.IsFree = false;
+            _appointmentRepository.UpdateFreeAppointment(fa);
+        }
+
+        public int GenerateId()
+        {
+            int number = _appointmentRepository.GetAllReservedAppointments().Count + 1;
+            return number;
+        }
 
         public string findMessageForFindingAppointmentsByDoctor(RequestSuggestionDTO requestSuggestionDTO)
         {
@@ -91,7 +138,7 @@ namespace project_backend.Service
             foreach (FreeAppointment fa in freeAppointments)
             {
                 FreeAppointmentDTO fDTO = FreeAppointmentAdapter.FreeAppointmentToFreeAppointmentDTO(fa);
-                fDTO.Doctor = user.Firstname + user.Lastname;
+                fDTO.Doctor = user.Firstname + " "+user.Lastname;
                 freeAppointmentDTOs.Add(fDTO);
             }
 
@@ -146,7 +193,7 @@ namespace project_backend.Service
             foreach (FreeAppointment fa in freeAppointments)
             {
                 FreeAppointmentDTO fDTO = FreeAppointmentAdapter.FreeAppointmentToFreeAppointmentDTO(fa);
-                fDTO.Doctor = user.Firstname + user.Lastname;
+                fDTO.Doctor = user.Firstname + " " +user.Lastname;
                 freeAppointmentDTOs.Add(fDTO);
             }
             return freeAppointmentDTOs;

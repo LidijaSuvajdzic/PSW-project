@@ -15,7 +15,7 @@ namespace project_backend.Repository
             _context = context;
         }
 
-        public void AddEmployee(User user)
+        public void AddUser(User user)
         {
             if (user != null)
             {
