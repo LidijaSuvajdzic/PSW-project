@@ -30,9 +30,9 @@ namespace project_backend.Service
             builder.UseNpgsql(connectionString);
             _userRepository = new UserRepository(new MyWebApiContext(builder.Options));
         }
-        public UserService(UserRepository employeeRepository)
+        public UserService(UserRepository userRepository)
         {
-            _userRepository = employeeRepository;
+            _userRepository = userRepository;
         }
 
         public void Register(User user)

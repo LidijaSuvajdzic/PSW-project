@@ -33,6 +33,15 @@ namespace project_backend.Repository
             return student;
         }
 
+        internal User FindUserByFirstname(string nameOfDoctor)
+        {
+            var student = (from s in _context.users
+                           where s.Firstname == nameOfDoctor
+                           select s).FirstOrDefault<User>();
+            return student;
+        }
+
+
         public List<User> FindUsersByRole(string role)
         {
 
@@ -61,6 +70,8 @@ namespace project_backend.Repository
             }
             this.disposed = true;
         }
+
+
 
         public void Dispose()
         {

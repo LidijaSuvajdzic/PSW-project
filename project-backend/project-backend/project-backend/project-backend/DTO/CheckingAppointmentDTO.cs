@@ -7,6 +7,10 @@ namespace project_backend.DTO
 {
     public class CheckingAppointmentDTO
     {
-
+        public String DateFrom { get; set; }
+        public String DateTo { get; set; }
+        public String TimeFrom { get; set; }
+        public String TimeTo { get; set; }
+        public String SelectedDoctor { get; set; }
     }
 }

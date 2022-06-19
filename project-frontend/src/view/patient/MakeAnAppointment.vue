@@ -10,7 +10,7 @@
             <input type="date" class="form-control" v-model="DateTo"/>
             <input type="time" class="form-control" v-model="TimeTo"/>
             <label for="name">Pick doctor:</label>
-            <select class="form-control" name="template" v-model="selectedDoctor">
+            <select class="form-control" name="template" v-model="SelectedDoctor">
                       <option v-for="(user , index) in doctors" v-bind:key="index"  >
                             {{user.Firstname}} {{user.Lastname}}
                       </option>
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-
+import axios from 'axios';
 export default {
   name: "MakeAnAppointment",
   data() {
@@ -41,7 +41,7 @@ export default {
         DateTo:"",
         TimeFrom:"",
         TimeTo:"",
-        selectedDoctor:"",
+        SelectedDoctor:"",
         user: { Firstname: "", Lastname: ""},
         doctors:"",
         message:"",
@@ -57,15 +57,17 @@ export default {
       return data;   
     },
     async Check() {
-      const res = await fetch("http://localhost:58025/api/appointment/check",{
-        DateFrom : this.DateFrom,
-        DateTo: this.DateTo,
-        TimeFrom: this.TimeFrom,
-        TimeTo: this.TimeTo,
-        SelectedDoctor:this.selectedDoctor
-      });
-      this.message = await res.json();
-      return this.message;    
+            const headers ={
+              'Content-Type': 'application/json;charset=UTF-8',
+              Accept: 'application/json',
+            }
+      console.log(this.DateFrom.toString())
+      console.log(this.DateTo.toString())
+      console.log(this.TimeFrom.toString())
+      console.log(this.TimeTo.toString())
+      console.log(this.SelectedDoctor)
+      axios.get("http://localhost:58025/api/appointment/",{    
+        Email: "caoo", Passwordd: "caca"},{headers})
     },
     async GoBack() {
         this.$router.push({ name: "StartPagePatient" });
