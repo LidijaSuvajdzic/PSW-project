@@ -1,6 +1,7 @@
 <template>
 <div><button @click="MakeAnAppointment()">Make an appointment</button></div>
 <div><button @click="SeeAllAppointments()">See your appointments</button></div>
+<div><button @click="LeaveFeedback()">Leave feedback</button></div>
 </template>
 
 <script>
@@ -28,6 +29,9 @@ export default {
  this.$router.push({ name: "AllAppointments" });
 
     },
+    async LeaveFeedback(){
+       this.$router.push({ name: "LeaveFeedback" });
+    }
   },
   async created() {
     this.doctors = await this.getAllDoctors();

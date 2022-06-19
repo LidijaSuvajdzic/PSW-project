@@ -9,7 +9,7 @@ namespace project_backend.Adapter
 {
     public class AppointmentFeedbackAdapter
     {
-        public static AppointmentFeedback AppointmentFeedbackToAppointmentFeedbackDTO(AppointmentFeedbackDTO appointmentFeedbackDTO)
+        public static AppointmentFeedback AppointmentFeedbackDTOToAppointmentFeedback(AppointmentFeedbackDTO appointmentFeedbackDTO)
         {
             AppointmentFeedback appointmentFeedback = new AppointmentFeedback();
             appointmentFeedback.Comment = appointmentFeedbackDTO.Comment;

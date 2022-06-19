@@ -10,8 +10,8 @@ using project_backend.Models;
 namespace project_backend.Migrations
 {
     [DbContext(typeof(MyWebApiContext))]
-    [Migration("20220619200510_druga")]
-    partial class druga
+    [Migration("20220619231813_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,29 @@ namespace project_backend.Migrations
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            modelBuilder.Entity("project_backend.Models.AppointmentFeedback", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id");
+
+                    b.Property<int>("AppointmentId")
+                        .HasColumnName("appointmentId");
+
+                    b.Property<string>("Comment")
+                        .HasColumnName("comment");
+
+                    b.Property<int>("Grade")
+                        .HasColumnName("grade");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnName("patientId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("appointmentFeedbacks");
+                });
 
             modelBuilder.Entity("project_backend.Models.FreeAppointment", b =>
                 {
@@ -84,6 +107,29 @@ namespace project_backend.Migrations
                             DoctorId = 2,
                             IsFree = true
                         });
+                });
+
+            modelBuilder.Entity("project_backend.Models.HospitalFeedback", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id");
+
+                    b.Property<string>("Comment")
+                        .HasColumnName("comment");
+
+                    b.Property<int>("Grade")
+                        .HasColumnName("grade");
+
+                    b.Property<bool>("IsAnonymously")
+                        .HasColumnName("isAnonymously");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnName("patientId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("hospitalFeedbacks");
                 });
 
             modelBuilder.Entity("project_backend.Models.ReservedAppointment", b =>

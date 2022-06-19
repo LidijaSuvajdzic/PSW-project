@@ -107,6 +107,29 @@ namespace project_backend.Migrations
                         });
                 });
 
+            modelBuilder.Entity("project_backend.Models.HospitalFeedback", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id");
+
+                    b.Property<string>("Comment")
+                        .HasColumnName("comment");
+
+                    b.Property<int>("Grade")
+                        .HasColumnName("grade");
+
+                    b.Property<bool>("IsAnonymously")
+                        .HasColumnName("isAnonymously");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnName("patientId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("hospitalFeedbacks");
+                });
+
             modelBuilder.Entity("project_backend.Models.ReservedAppointment", b =>
                 {
                     b.Property<int>("Id")

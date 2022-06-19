@@ -38,7 +38,7 @@ namespace project_backend.Service
         }
         public void addAppointmentFeedback(AppointmentFeedbackDTO appointmentFeedbackDTO)
         {
-            AppointmentFeedback appointmentFeedback = AppointmentFeedbackAdapter.AppointmentFeedbackToAppointmentFeedbackDTO(appointmentFeedbackDTO);
+            AppointmentFeedback appointmentFeedback = AppointmentFeedbackAdapter.AppointmentFeedbackDTOToAppointmentFeedback(appointmentFeedbackDTO);
             User patient = _userRepository.FindUserByFirstname(appointmentFeedbackDTO.PatientName);
             appointmentFeedback.PatientId = patient.UserId;
             appointmentFeedback.Id = GenerateId();

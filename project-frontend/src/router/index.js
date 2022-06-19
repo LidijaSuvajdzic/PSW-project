@@ -5,6 +5,7 @@ import StartPagePatient from "../view/patient/StartPagePatient"
 import MakeAnAppointment from "../view/patient/MakeAnAppointment"
 import AllAppointments from "../view/patient/AllAppointments"
 import FutureAppointments from "../view/patient/FutureAppointments"
+import LeaveFeedback from "../view/patient/LeaveFeedback"
 const routes = [
   {
     path: "/",
@@ -15,6 +16,11 @@ const routes = [
     path: "/StartPagePatient",
     name: "StartPagePatient",
     component: StartPagePatient,
+  },
+  {
+    path: "/LeaveFeedback",
+    name: "LeaveFeedback",
+    component: LeaveFeedback,
   },
   {
     path: "/FutureAppointments",

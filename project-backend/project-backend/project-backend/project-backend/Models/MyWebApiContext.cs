@@ -13,6 +13,7 @@ namespace project_backend.Models
         public DbSet<FreeAppointment> freeAppointments { get; set; }
         public DbSet<ReservedAppointment> reservedAppointments { get; set; }
         public DbSet<AppointmentFeedback> appointmentFeedbacks { get; set; }
+        public DbSet<HospitalFeedback> hospitalFeedbacks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
