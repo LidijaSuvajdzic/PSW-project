@@ -15,6 +15,7 @@
         </tr>
     </thead>
     <tbody>
+        
           <tr v-for="(appointment, index) in appointments" :key="index">
           <td>{{appointment.Id}}</td>
                   <td>{{appointment.DateFrom}}</td>
