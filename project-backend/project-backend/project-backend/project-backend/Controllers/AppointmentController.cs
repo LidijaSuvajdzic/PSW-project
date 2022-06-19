@@ -23,7 +23,7 @@ namespace project_backend.Controllers
         }
 
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult cheking([FromBody] CheckingAppointmentDTO checkingAppointmentDTO)
         {
             AppointmentService appointmentService = new AppointmentService();

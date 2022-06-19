@@ -4,13 +4,13 @@
     <form>
         <div class="form-group">
             <label for="name">Date from:</label>
-            <input type="date" class="form-control" v-model="DateFrom"/>
-             <input type="time" class="form-control" v-model="TimeFrom"/>
+            <input type="date" class="form-control" v-model="dateFrom"/>
+             <input type="time" class="form-control" v-model="timeFrom"/>
             <label for="name">Date to:</label>
-            <input type="date" class="form-control" v-model="DateTo"/>
-            <input type="time" class="form-control" v-model="TimeTo"/>
+            <input type="date" class="form-control" v-model="dateTo"/>
+            <input type="time" class="form-control" v-model="timeTo"/>
             <label for="name">Pick doctor:</label>
-            <select class="form-control" name="template" v-model="SelectedDoctor">
+            <select class="form-control" name="template" v-model="selectedDoctor">
                       <option v-for="(user , index) in doctors" v-bind:key="index"  >
                             {{user.Firstname}} {{user.Lastname}}
                       </option>
@@ -37,11 +37,11 @@ export default {
   name: "MakeAnAppointment",
   data() {
     return {
-        DateFrom:"",
-        DateTo:"",
-        TimeFrom:"",
-        TimeTo:"",
-        SelectedDoctor:"",
+        dateFrom:"",
+        dateTo:"",
+        timeFrom:"",
+        timeTo:"",
+        selectedDoctor:"",
         user: { Firstname: "", Lastname: ""},
         doctors:"",
         message:"",
@@ -57,17 +57,19 @@ export default {
       return data;   
     },
     async Check() {
-            const headers ={
-              'Content-Type': 'application/json;charset=UTF-8',
-              Accept: 'application/json',
-            }
-      console.log(this.DateFrom.toString())
-      console.log(this.DateTo.toString())
-      console.log(this.TimeFrom.toString())
-      console.log(this.TimeTo.toString())
-      console.log(this.SelectedDoctor)
-      axios.get("http://localhost:58025/api/appointment/",{    
-        Email: "caoo", Passwordd: "caca"},{headers})
+      const headers ={
+        "Content-type": "application/json",
+      }; 
+      axios.post("http://localhost:58025/api/appointment/",{ 
+       DateFrom: this.dateFrom,
+       DateTo: this.dateTo,
+       TimeFrom: this.timeFrom,
+       TimeTo: this.timeTo,
+      SelectedDoctor: this.selectedDoctor
+        }, {headers})      
+        .then (response => { 
+        this.message = response.data;
+      }) 
     },
     async GoBack() {
         this.$router.push({ name: "StartPagePatient" });
