@@ -31,5 +31,28 @@ namespace project_backend.Controllers
                 return Ok(message);
             
         }
+
+        [HttpPost]
+        [Route("suggestAppointments")]
+        public IActionResult suggestAppointments([FromBody] RequestSuggestionDTO requestSuggestionDTO)
+        {
+            String priority = requestSuggestionDTO.Priority;
+            AppointmentService appointmentService = new AppointmentService();
+            String message = "";
+            List<FreeAppointmentDTO> freeAppointmentDTOs = new List<FreeAppointmentDTO>();
+            if (priority == "Doctor") {
+                message=appointmentService.findMessageForFindingAppointmentsByDoctor(requestSuggestionDTO);
+                freeAppointmentDTOs = appointmentService.findAppointmentByDoctor(requestSuggestionDTO);
+            } 
+            else {
+                message = appointmentService.findMessageForFindingAppointmentsByTime(requestSuggestionDTO);
+                freeAppointmentDTOs = appointmentService.findAppointmentByDate(requestSuggestionDTO);
+            }
+            if (message == "No appointments found") {
+                return BadRequest();
+            } else {
+                return Ok(freeAppointmentDTOs);
+            }
+        }
     }
 }

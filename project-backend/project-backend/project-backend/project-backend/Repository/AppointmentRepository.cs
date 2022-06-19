@@ -45,7 +45,23 @@ namespace project_backend.Repository
                            select s).ToList();
             return lists;
         }
+
+
+        public List<FreeAppointment> findAppoinmentsByDoctor(int id)
+        {
+            List<FreeAppointment> lists = (from s in _context.freeAppointments
+                                           where s.DoctorId == id
+                                           select s).ToList();
+            return lists;
+        }
+
+        public List<FreeAppointment> findAppoinmentsByDate(DateTime dateFrom, DateTime dateTo)
+        {
+            List<FreeAppointment> lists = (from s in _context.freeAppointments
+                                           where s.DateFrom >= dateFrom && s.DateTo <= dateTo
+                                           select s).ToList();
+            return lists;
+        }
     }
 }
 
-//string query "SELECT * FROM LocalHotels WHERE city='LONDON' AND start <='12.15.2015 00:00:00' AND deadline >='12.18.2015 00:00:00' ORDER BY city"

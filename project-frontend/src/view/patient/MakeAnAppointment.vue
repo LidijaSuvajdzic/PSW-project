@@ -4,13 +4,13 @@
     <form>
         <div class="form-group">
             <label for="name">Date from:</label>
-            <input type="date" class="form-control" v-model="dateFrom"/>
-             <input type="time" class="form-control" v-model="timeFrom"/>
+            <input type="date" class="form-control" v-model="dateFrom" :disabled="isDoctor"/>
+             <input type="time" class="form-control" v-model="timeFrom" :disabled="isDoctor"/>
             <label for="name">Date to:</label>
-            <input type="date" class="form-control" v-model="dateTo"/>
-            <input type="time" class="form-control" v-model="timeTo"/>
+            <input type="date" class="form-control" v-model="dateTo" :disabled="isDoctor"/>
+            <input type="time" class="form-control" v-model="timeTo" :disabled="isDoctor"/>
             <label for="name">Pick doctor:</label>
-            <select class="form-control" name="template" v-model="selectedDoctor">
+            <select class="form-control" name="template" v-model="selectedDoctor" :disabled="isDoctor==false">
                       <option v-for="(user , index) in doctors" v-bind:key="index"  >
                             {{user.Firstname}} {{user.Lastname}}
                       </option>
@@ -27,7 +27,25 @@
         </div>
    </form>
 
-   <label>{{message}}</label>
+  <tr> <label>{{message}}</label></tr>
+ <tr>  <label v-if="this.message == 'No appointments found'">Suggest appointments:</label></tr>
+   <table v-if="this.message == 'No appointments found'" class="styled-table">
+    <thead>
+        <tr>
+            <th>Date from</th>
+            <th>Date to</th>
+            <th>Doctor</th> 
+            <th></th>         
+        </tr>
+    </thead>
+    <tbody>
+          <tr v-for="(appointment, index) in appointments" :key="index">
+                  <td>{{appointment.DateFrom}}</td>
+                  <td>{{appointment.DateTo}}</td>
+                  <td>{{appointment.Doctor}}</td>
+           </tr> 
+    </tbody>
+</table>
 </div>
 </template>
 
@@ -44,9 +62,12 @@ export default {
         selectedDoctor:"",
         user: { Firstname: "", Lastname: ""},
         doctors:"",
+        appointments:"",
+        appointment: {DateFrom:"", DateTo:"", DoctorsFirstname:"", DoctorsLastname:""},
         message:"",
         isShow: 0,
-        priority:""
+        priority:"",
+        isDoctor:null,
     };
   },
 
@@ -69,7 +90,35 @@ export default {
         }, {headers})      
         .then (response => { 
         this.message = response.data;
+        if (response.data === "We found an appointment for you") {
+          this.isShow = 1;
+        }else if (response.data === "No appointments found") {
+          if(this.priority == "Doctor") {
+            this.isDoctor = true;
+          }else{
+            this.isDoctor = false;
+          }
+        this.SuggestAppointments();
+         
+        }
       }) 
+    },
+        async SuggestAppointments() {
+      const headers ={
+        "Content-type": "application/json",
+      }; 
+      axios.post("http://localhost:58025/api/appointment/suggestAppointments",{ 
+       DateFrom: this.dateFrom,
+       DateTo: this.dateTo,
+       TimeFrom: this.timeFrom,
+       TimeTo: this.timeTo,
+       SelectedDoctor: this.selectedDoctor,
+       Priority: this.priority
+        }, {headers})    
+                .then (response => { 
+          this.appointments = response.data;
+          console.log("Duzina niza je"+this.appointments.length)
+        })   
     },
     async GoBack() {
         this.$router.push({ name: "StartPagePatient" });
