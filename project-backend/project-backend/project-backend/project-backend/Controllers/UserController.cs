@@ -73,6 +73,55 @@ namespace project_backend.Controllers
             return Ok(usersDTO);
         }
 
+        [Route("findAllMaliciousUsers")]
+        [HttpGet]
+        public IActionResult findAllMaliciousUsers()
+        {
+            UserService userService = new UserService();
+            List<UserDTO> usersDTO = userService.findAllMaliciousUsers();
+
+            return Ok(usersDTO);
+        }
+
+
+        [Route("findBlockedUsers")]
+        [HttpGet]
+        public IActionResult findAlBlockedUsers()
+        {
+            UserService userService = new UserService();
+            List<UserDTO> usersDTO = userService.findAllBlockedUsers();
+
+            return Ok(usersDTO);
+        }
+
+        [Route("block/{id}")]
+        [HttpPost]
+        public IActionResult block(int id)
+        {
+            UserService userService = new UserService();
+            userService.block(id);
+            return Ok();
+        }
+
+        [Route("dontBlock/{id}")]
+        [HttpPost]
+        public IActionResult dontBlock(int id)
+        {
+            UserService userService = new UserService();
+            userService.dontBlock(id);
+            return Ok();
+        }
+
+        [Route("unBlock/{id}")]
+        [HttpPost]
+        public IActionResult unBlock(int id)
+        {
+            UserService userService = new UserService();
+            userService.unBlock(id);
+            return Ok();
+        }
+
+
         [Route("findAllSpecialists")]
         [HttpGet]
         public IActionResult findAllSpecialists()

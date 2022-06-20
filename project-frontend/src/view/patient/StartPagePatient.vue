@@ -6,6 +6,8 @@
 
 
 <div><button @click="MakeAReferral()">Make an appointment by a specialist</button></div>
+<div><button @click="SeeMaliciousUsers()">See potentially malicious users</button></div>
+<div><button @click="SeeBlockedUsers()">See blocked users</button></div>
 </template>
 
 <script>
@@ -41,6 +43,12 @@ export default {
     },
     async SeeFeedback() {
       this.$router.push({ name: "SeeFeedback" });
+    },
+    async SeeMaliciousUsers() {
+      this.$router.push({ name: "SeeMaliciousUsers" });
+    },
+    async SeeBlockedUsers() {
+      this.$router.push({ name: "SeeBlockedUsers" });
     }
   },
   async created() {

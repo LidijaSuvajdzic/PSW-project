@@ -31,7 +31,7 @@
 <script>
 import axios from 'axios';
 export default {
-    name: "FutureAppointments",
+    name: "SeeFedback",
       components: {
 },
     data() {

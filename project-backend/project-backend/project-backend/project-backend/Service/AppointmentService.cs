@@ -19,6 +19,7 @@ namespace project_backend.Service
         private AppointmentRepository _appointmentRepository;
         private UserRepository _userRepository;
         private ReferralRepository _referralRepository;
+        private PenalRepository _penalRepository;
         public AppointmentService()
         {
             IConfigurationRoot configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
@@ -28,12 +29,14 @@ namespace project_backend.Service
             _appointmentRepository = new AppointmentRepository(new MyWebApiContext(builder.Options));
             _userRepository = new UserRepository(new MyWebApiContext(builder.Options));
             _referralRepository = new ReferralRepository(new MyWebApiContext(builder.Options));
+            _penalRepository = new PenalRepository(new MyWebApiContext(builder.Options));
         }
 
-        public AppointmentService(AppointmentRepository appointmentRepository, UserRepository userRepository, ReferralRepository referralRepository) {
+        public AppointmentService(AppointmentRepository appointmentRepository, UserRepository userRepository, ReferralRepository referralRepository, PenalRepository penalRepository) {
             _appointmentRepository = appointmentRepository;
             _userRepository = userRepository;
             _referralRepository = referralRepository;
+            _penalRepository = penalRepository;
         }
 
 
@@ -104,8 +107,10 @@ namespace project_backend.Service
             return message;
         }
 
-        public void cancelAppointment(int id)
-        {
+        public void cancelAppointment(int id,String firstname,String lastname)
+        { 
+            User patient = _userRepository.FindUserByFirstnameAndLastname(firstname,lastname);
+
             ReservedAppointment reservedAppointment = _appointmentRepository.findAppointmentById(id);
             FreeAppointment freeAppointment = _appointmentRepository.findAppoinmentByDateAndId(reservedAppointment.DateFrom,reservedAppointment.DateTo,reservedAppointment.DoctorId);
             int doctorId = reservedAppointment.DoctorId;
@@ -115,10 +120,24 @@ namespace project_backend.Service
                 _referralRepository.RemoveReferral(referral);
             }
             freeAppointment.IsFree = true;
+
+            PenalService penalService = new PenalService();
+            Penal penal = new Penal();
+            penal.PenalId = penalService.GenerateId();
+            penal.PatientId = patient.UserId;
+            penal.Date = DateTime.Now;
+            _penalRepository.addPenal(penal);
+
+            Debug.WriteLine("Kreirala sam penal");
+
+            patient.Penals += 1;
+            _userRepository.UpdateUser(patient);
+            Debug.WriteLine("Azurirala pacijenta");
+            //cekiraj
+            penalService.checkMalicious(patient);
+            Debug.WriteLine("Ni ovde nije puklo");
             _appointmentRepository.UpdateFreeAppointment(freeAppointment);
-            Debug.WriteLine("PRE BRISANJA");
             _appointmentRepository.deleteReservedAppointment(reservedAppointment);
-            Debug.WriteLine("POSLE BRISANJA");
 
         }
 
@@ -143,7 +162,7 @@ namespace project_backend.Service
 
         public int GenerateId()
         {
-            int number = _appointmentRepository.GetAllReservedAppointments().Count + 1;
+            int number = _appointmentRepository.GetAllReservedAppointments().Count + 10;
             return number;
         }
 

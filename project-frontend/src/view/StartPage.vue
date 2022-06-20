@@ -66,7 +66,7 @@
             </h5>
           </div>
           <div class="modal-body" style="padding: 15px 50px">
-            <form role="form">
+            <form role="form"  @submit.prevent="Login">
               <div class="form-group">
                 <label for="name">E-mail:</label>
                 <input
@@ -214,7 +214,7 @@ export default {
          return new Swal({
              title:"Warning",
              type: "warning",
-             text:'Username or password are incorect!'
+             text:'Username or password are incorect or you are blocked!'
            });}
       })
               

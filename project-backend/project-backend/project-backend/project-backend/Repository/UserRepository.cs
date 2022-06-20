@@ -58,6 +58,15 @@ namespace project_backend.Repository
                                 select s).FirstOrDefault<User>();
             return user;
         }
+
+        internal User FindUserByFirstnameAndLastname(string firstname, string lastname)
+        {
+            User user = (from s in _context.users
+                         where s.Firstname==firstname && s.Lastname==lastname
+                         select s).FirstOrDefault<User>();
+            return user;
+        }
+
         public List<User> GetAllUsers()
         {
             return _context.users.ToList();
@@ -86,6 +95,26 @@ namespace project_backend.Repository
             GC.SuppressFinalize(this);
         }
 
+        internal void UpdateUser(User patient)
+        {
+            _context.users.Update(patient);
+            _context.SaveChanges();
+        }
 
+        internal List<User> findAllMaliciousUsers()
+        {
+            List<User> users = (from s in _context.users
+                                where s.IsPotentiallyMalicious==true
+                                select s).ToList();
+            return users;
+        }
+
+        internal List<User> findAllBlockedUsers()
+        {
+            List<User> users = (from s in _context.users
+                                where s.IsBlocked == true
+                                select s).ToList();
+            return users;
+        }
     }
 }

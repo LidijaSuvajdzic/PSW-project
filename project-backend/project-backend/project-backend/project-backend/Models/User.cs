@@ -29,5 +29,7 @@ namespace project_backend.Models
         public bool IsBlocked { get; set; }
         [Column("penals")]
         public int Penals { get; set; }
+        [Column("isPotentiallyMalicious")]
+        public bool IsPotentiallyMalicious { get; set; }
     }
 }

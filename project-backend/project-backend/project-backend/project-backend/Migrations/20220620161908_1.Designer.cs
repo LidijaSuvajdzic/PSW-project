@@ -10,8 +10,8 @@ using project_backend.Models;
 namespace project_backend.Migrations
 {
     [DbContext(typeof(MyWebApiContext))]
-    [Migration("20220620122242_migration")]
-    partial class migration
+    [Migration("20220620161908_1")]
+    partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -86,24 +86,24 @@ namespace project_backend.Migrations
                         new
                         {
                             Id = 3,
-                            DateFrom = new DateTime(2022, 6, 20, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateTo = new DateTime(2022, 6, 20, 16, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateFrom = new DateTime(2022, 7, 25, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateTo = new DateTime(2022, 7, 25, 16, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorId = 3,
                             IsFree = true
                         },
                         new
                         {
                             Id = 4,
-                            DateFrom = new DateTime(2022, 6, 20, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateTo = new DateTime(2022, 6, 20, 16, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateFrom = new DateTime(2022, 7, 26, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateTo = new DateTime(2022, 7, 26, 16, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorId = 4,
                             IsFree = true
                         },
                         new
                         {
                             Id = 5,
-                            DateFrom = new DateTime(2022, 3, 20, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateTo = new DateTime(2022, 3, 20, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateFrom = new DateTime(2022, 3, 30, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateTo = new DateTime(2022, 3, 30, 14, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorId = 2,
                             IsFree = true
                         },
@@ -118,24 +118,24 @@ namespace project_backend.Migrations
                         new
                         {
                             Id = 7,
-                            DateFrom = new DateTime(2022, 6, 20, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateTo = new DateTime(2022, 6, 20, 16, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateFrom = new DateTime(2022, 6, 29, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateTo = new DateTime(2022, 6, 29, 16, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorId = 5,
                             IsFree = true
                         },
                         new
                         {
                             Id = 8,
-                            DateFrom = new DateTime(2022, 3, 20, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateTo = new DateTime(2022, 3, 20, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateFrom = new DateTime(2022, 3, 22, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateTo = new DateTime(2022, 3, 22, 14, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorId = 6,
                             IsFree = true
                         },
                         new
                         {
                             Id = 9,
-                            DateFrom = new DateTime(2022, 8, 20, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateTo = new DateTime(2022, 8, 20, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateFrom = new DateTime(2022, 9, 20, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateTo = new DateTime(2022, 9, 20, 14, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorId = 5,
                             IsFree = true
                         });
@@ -165,6 +165,23 @@ namespace project_backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("hospitalFeedback");
+                });
+
+            modelBuilder.Entity("project_backend.Models.Penal", b =>
+                {
+                    b.Property<int>("PenalId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("penalId");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnName("date");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnName("patientId");
+
+                    b.HasKey("PenalId");
+
+                    b.ToTable("penals");
                 });
 
             modelBuilder.Entity("project_backend.Models.Referral", b =>
@@ -240,6 +257,9 @@ namespace project_backend.Migrations
                     b.Property<bool>("IsBlocked")
                         .HasColumnName("isBlocked");
 
+                    b.Property<bool>("IsPotentiallyMalicious")
+                        .HasColumnName("isPotentiallyMalicious");
+
                     b.Property<string>("Lastname")
                         .HasColumnName("lastname");
 
@@ -264,6 +284,7 @@ namespace project_backend.Migrations
                             Firstname = "Lidija",
                             HealthCardNumber = 1234567890,
                             IsBlocked = false,
+                            IsPotentiallyMalicious = false,
                             Lastname = "Suvajdzic",
                             Passwordd = "1234567890",
                             Penals = 0,
@@ -276,6 +297,7 @@ namespace project_backend.Migrations
                             Firstname = "Dragana",
                             HealthCardNumber = 987654321,
                             IsBlocked = false,
+                            IsPotentiallyMalicious = false,
                             Lastname = "Arsin",
                             Passwordd = "1234567890",
                             Penals = 0,
@@ -288,6 +310,7 @@ namespace project_backend.Migrations
                             Firstname = "Milica",
                             HealthCardNumber = 111154321,
                             IsBlocked = false,
+                            IsPotentiallyMalicious = false,
                             Lastname = "Peric",
                             Passwordd = "1234567890",
                             Penals = 0,
@@ -300,6 +323,7 @@ namespace project_backend.Migrations
                             Firstname = "Simonida",
                             HealthCardNumber = 982222321,
                             IsBlocked = false,
+                            IsPotentiallyMalicious = false,
                             Lastname = "Simic",
                             Passwordd = "1234567890",
                             Penals = 0,
@@ -312,6 +336,7 @@ namespace project_backend.Migrations
                             Firstname = "Sanja",
                             HealthCardNumber = 111154321,
                             IsBlocked = false,
+                            IsPotentiallyMalicious = false,
                             Lastname = "Peric",
                             Passwordd = "1234567890",
                             Penals = 0,
@@ -324,6 +349,7 @@ namespace project_backend.Migrations
                             Firstname = "Stefan",
                             HealthCardNumber = 982222321,
                             IsBlocked = false,
+                            IsPotentiallyMalicious = false,
                             Lastname = "Simic",
                             Passwordd = "1234567890",
                             Penals = 0,
@@ -336,6 +362,7 @@ namespace project_backend.Migrations
                             Firstname = "Kristina",
                             HealthCardNumber = 111154321,
                             IsBlocked = false,
+                            IsPotentiallyMalicious = false,
                             Lastname = "Peric",
                             Passwordd = "1234567890",
                             Penals = 0,
@@ -348,6 +375,7 @@ namespace project_backend.Migrations
                             Firstname = "Esma",
                             HealthCardNumber = 982222321,
                             IsBlocked = false,
+                            IsPotentiallyMalicious = false,
                             Lastname = "Simic",
                             Passwordd = "1234567890",
                             Penals = 0,

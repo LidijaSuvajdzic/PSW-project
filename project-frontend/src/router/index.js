@@ -8,6 +8,8 @@ import FutureAppointments from "../view/patient/FutureAppointments"
 import LeaveFeedback from "../view/patient/LeaveFeedback"
 import MakeAReferral from "../view/patient/MakeAReferral"
 import SeeFeedback from "../view/administrator/SeeFeedback"
+import SeeMaliciousUsers from "../view/administrator/SeeMaliciousUsers"
+import SeeBlockedUsers from "../view/administrator/SeeBlockedUsers"
 const routes = [
 
   {
@@ -19,6 +21,16 @@ const routes = [
     path: "/StartPagePatient",
     name: "StartPagePatient",
     component: StartPagePatient,
+  },
+  {
+    path: "/SeeBlockedUsers",
+    name: "SeeBlockedUsers",
+    component: SeeBlockedUsers,
+  },
+  {
+    path: "/SeeMaliciousUsers",
+    name: "SeeMaliciousUsers",
+    component: SeeMaliciousUsers,
   },
   {
     path: "/SeeFeedback",

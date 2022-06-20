@@ -33,8 +33,8 @@ namespace project_backend.Controllers
         }
 
         [HttpDelete]
-        [Route("delete/{id}")]
-        public IActionResult delete(int id)
+        [Route("delete/{id}/{firstname}/{lastname}")]
+        public IActionResult delete(int id,String firstname,String lastname)
         {
             AppointmentService appointmentService = new AppointmentService();
             Debug.WriteLine("Id je" + id);
@@ -42,7 +42,7 @@ namespace project_backend.Controllers
             if (message=="You can't cancel the appointment!") {
                 return BadRequest();
             } else {
-                appointmentService.cancelAppointment(id);
+                appointmentService.cancelAppointment(id,firstname,lastname);
                return Ok();
             }
             

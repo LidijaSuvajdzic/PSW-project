@@ -70,6 +70,7 @@ export default {
             appointments: "",
             appointment: { Id: 0, DateFrom: "", DateTo: "", DoctorsFirstname: "", DoctorsLastname: "" },
             firstname:"",
+            lastname:"",
             id:0,
         };
     },
@@ -87,10 +88,12 @@ export default {
             this.id = id;
         },
         async Cancel() {
+          this.firstname = localStorage.getItem("firstname");
+          this.lastname = localStorage.getItem("lastname");
       const headers ={
         "Content-type": "application/json",
       }; 
-      axios.delete("http://localhost:58025/api/appointment/delete/"+this.id, {headers}) 
+      axios.delete("http://localhost:58025/api/appointment/delete/"+this.id+"/"+this.firstname+"/"+this.lastname, {headers}) 
                     .catch( function (error) {
         if (error.response.status == 400) {
          return new Swal({

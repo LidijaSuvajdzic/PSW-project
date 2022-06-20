@@ -40,6 +40,7 @@ namespace project_backend.Service
             user.UserId = GenerateId();
             user.Penals = 0;
             user.IsBlocked = false;
+            user.IsPotentiallyMalicious = false;
             _userRepository.AddUser(user);
         }
 
@@ -63,7 +64,11 @@ namespace project_backend.Service
             if (u.Passwordd != passwordd) {
                 u = null;
             }
-                return u;
+            if (u.IsBlocked)
+            {
+                u = null;
+            }
+            return u;
         }
 
         public int GenerateId()
@@ -82,7 +87,51 @@ namespace project_backend.Service
             return userDTOs;
         }
 
+        internal List<UserDTO> findAllMaliciousUsers()
+        {
+            List<User> users = _userRepository.findAllMaliciousUsers();
+            List<UserDTO> userDTOs = new List<UserDTO>();
+            foreach (User u in users)
+            {
+                userDTOs.Add(UserAdapter.UserToUserDTO(u));
+            }
+            return userDTOs;
+        }
 
+        internal List<UserDTO> findAllBlockedUsers()
+        {
+            List<User> users = _userRepository.findAllBlockedUsers();
+            List<UserDTO> userDTOs = new List<UserDTO>();
+            foreach (User u in users)
+            {
+                userDTOs.Add(UserAdapter.UserToUserDTO(u));
+            }
+            return userDTOs;
+        }
+
+        public void block(int id)
+        {
+            User user = _userRepository.FindUserById(id);
+            user.IsBlocked = true;
+            user.IsPotentiallyMalicious = false;
+            _userRepository.UpdateUser(user);
+
+        }
+
+        internal void dontBlock(int id)
+        {
+            User user = _userRepository.FindUserById(id);
+            user.IsBlocked = false;
+            user.IsPotentiallyMalicious = false;
+            _userRepository.UpdateUser(user);
+        }
+
+        internal void unBlock(int id)
+        {
+            User user = _userRepository.FindUserById(id);
+            user.IsBlocked = false;
+            _userRepository.UpdateUser(user);
+        }
 
         public string GenerateToken(int userId)
         {
