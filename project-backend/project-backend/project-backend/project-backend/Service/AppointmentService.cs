@@ -18,7 +18,7 @@ namespace project_backend.Service
 
         private AppointmentRepository _appointmentRepository;
         private UserRepository _userRepository;
-
+        private ReferralRepository _referralRepository;
         public AppointmentService()
         {
             IConfigurationRoot configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
@@ -27,11 +27,13 @@ namespace project_backend.Service
             builder.UseNpgsql(connectionString);
             _appointmentRepository = new AppointmentRepository(new MyWebApiContext(builder.Options));
             _userRepository = new UserRepository(new MyWebApiContext(builder.Options));
+            _referralRepository = new ReferralRepository(new MyWebApiContext(builder.Options));
         }
 
-        public AppointmentService(AppointmentRepository appointmentRepository, UserRepository userRepository) {
+        public AppointmentService(AppointmentRepository appointmentRepository, UserRepository userRepository, ReferralRepository referralRepository) {
             _appointmentRepository = appointmentRepository;
             _userRepository = userRepository;
+            _referralRepository = referralRepository;
         }
 
 
@@ -105,8 +107,13 @@ namespace project_backend.Service
         public void cancelAppointment(int id)
         {
             ReservedAppointment reservedAppointment = _appointmentRepository.findAppointmentById(id);
-            FreeAppointment freeAppointment = _appointmentRepository.findAppoinmentByDate(reservedAppointment.DateFrom,reservedAppointment.DateTo);
-
+            FreeAppointment freeAppointment = _appointmentRepository.findAppoinmentByDateAndId(reservedAppointment.DateFrom,reservedAppointment.DateTo,reservedAppointment.DoctorId);
+            int doctorId = reservedAppointment.DoctorId;
+            User doctor = _userRepository.FindUserById(doctorId);
+            if (doctor.Role=="SPECIALIST") {
+                Referral referral = _referralRepository.findReferral(reservedAppointment.DateFrom,reservedAppointment.DateTo,reservedAppointment.DoctorId,reservedAppointment.PatientId);
+                _referralRepository.RemoveReferral(referral);
+            }
             freeAppointment.IsFree = true;
             _appointmentRepository.UpdateFreeAppointment(freeAppointment);
             Debug.WriteLine("PRE BRISANJA");

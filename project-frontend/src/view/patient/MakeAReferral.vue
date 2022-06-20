@@ -111,7 +111,7 @@ export default {
         "Content-type": "application/json",
       }; 
       axios.post("http://localhost:58025/api/referral/addReferral",{ 
-       AppointmentId: this.id,
+       Id: this.id,
        SelectedSpecialist: this.selectedSpecialist,
        SelecterPatient: this.selectedPatient,
        Reason: this.reason,

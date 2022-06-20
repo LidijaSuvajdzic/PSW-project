@@ -22,6 +22,7 @@ namespace project_backend.Repository
         {
             return _context.referrals.ToList();
         }
+
         protected virtual void Dispose(bool disposing)
         {
             if (!this.disposed)
@@ -48,6 +49,20 @@ namespace project_backend.Repository
                 _context.referrals.Add(referral);
                 _context.SaveChanges();
             }
+        }
+
+        internal Referral findReferral(DateTime dateFrom, DateTime dateTo, int doctorId, int patientId)
+        {
+            var referral = (from s in _context.referrals
+                            where s.DateFrom == dateFrom && s.DateTo == dateTo && s.SpecialistId == doctorId && s.PatientId == patientId
+                            select s).FirstOrDefault<Referral>();
+            return referral;
+        }
+
+        internal void RemoveReferral(Referral referral)
+        {
+            _context.referrals.Remove(referral);
+            _context.SaveChanges();
         }
     }
 }

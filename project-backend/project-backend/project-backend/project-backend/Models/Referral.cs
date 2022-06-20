@@ -19,6 +19,10 @@ namespace project_backend.Models
         public int SpecialistId { get; set; }
         [Column("reason")]
         public String Reason { get; set; }
+        [Column("dateFrom")]
+        public DateTime DateFrom { get; set; }
+        [Column("dateTo")]
+        public DateTime DateTo { get; set; }
 
     }
 }

@@ -152,6 +152,14 @@ namespace project_backend.Repository
             return freeAppointment;
         }
 
+        internal FreeAppointment findAppoinmentByDateAndId(DateTime dateFrom, DateTime dateTo, int doctorId)
+        {
+            FreeAppointment freeAppointment = (from s in _context.freeAppointments
+                                               where s.DateFrom == dateFrom && s.DateTo == dateTo && s.DoctorId==doctorId
+                                               select s).FirstOrDefault<FreeAppointment>();
+            return freeAppointment;
+        }
+
         internal void deleteReservedAppointment(ReservedAppointment reservedAppointment)
         {
             _context.reservedAppointments.Remove(reservedAppointment);
