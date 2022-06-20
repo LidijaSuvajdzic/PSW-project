@@ -32,6 +32,24 @@ namespace project_backend.Controllers
             
         }
 
+        [HttpDelete]
+        [Route("delete/{id}")]
+        public IActionResult delete(int id)
+        {
+            AppointmentService appointmentService = new AppointmentService();
+            Debug.WriteLine("Id je" + id);
+            string message = appointmentService.checkDates(id);
+            if (message=="You can't cancel the appointment!") {
+                return BadRequest();
+            } else {
+                appointmentService.cancelAppointment(id);
+               return Ok();
+            }
+            
+
+        }
+
+
         [HttpPost]
         [Route("suggestAppointments")]
         public IActionResult suggestAppointments([FromBody] RequestSuggestionDTO requestSuggestionDTO)

@@ -76,6 +76,16 @@ namespace project_backend.Models
                                        System.Globalization.CultureInfo.InvariantCulture),
                     DoctorId = 2,
                     IsFree = true
+                },
+                new FreeAppointment
+                {
+                    Id = 6,
+                    DateFrom = DateTime.ParseExact("2022-08-20 13:00:00", "yyyy-MM-dd HH:mm:ss",
+                                       System.Globalization.CultureInfo.InvariantCulture),
+                    DateTo = DateTime.ParseExact("2022-08-20 14:00:00", "yyyy-MM-dd HH:mm:ss",
+                                       System.Globalization.CultureInfo.InvariantCulture),
+                    DoctorId = 3,
+                    IsFree = true
                 }
             );
         }

@@ -33,6 +33,9 @@ namespace project_backend.Service
             _appointmentRepository = appointmentRepository;
             _userRepository = userRepository;
         }
+
+
+
         public string checkAvailability(CheckingAppointmentDTO checkingAppointmentDTO)
         {
             String nameOfDoctor = checkingAppointmentDTO.SelectedDoctor.Split(" ")[0];
@@ -60,6 +63,8 @@ namespace project_backend.Service
             return message;
         }
 
+
+
         public void addAppointment(ReservedAppointmentDTO reservedAppointmentDTO)
         {
             String datefrom = reservedAppointmentDTO.DateFrom + " " + reservedAppointmentDTO.TimeFrom + ":00";
@@ -82,6 +87,32 @@ namespace project_backend.Service
             fa.IsFree = false;
             _appointmentRepository.UpdateFreeAppointment(fa);
             _appointmentRepository.AddAppointment(reservedAppointment);
+        }
+
+        public string checkDates(int id)
+        {
+            String message = "";
+            ReservedAppointment reservedAppointment = _appointmentRepository.findAppointmentById(id);
+            double days = (reservedAppointment.DateFrom - DateTime.Now).TotalDays;
+            Debug.WriteLine("razlika u satima je"+ days);
+            if (days < 2)
+            {
+                message = "You can't cancel the appointment!";
+            }
+            return message;
+        }
+
+        public void cancelAppointment(int id)
+        {
+            ReservedAppointment reservedAppointment = _appointmentRepository.findAppointmentById(id);
+            FreeAppointment freeAppointment = _appointmentRepository.findAppoinmentByDate(reservedAppointment.DateFrom,reservedAppointment.DateTo);
+
+            freeAppointment.IsFree = true;
+            _appointmentRepository.UpdateFreeAppointment(freeAppointment);
+            Debug.WriteLine("PRE BRISANJA");
+            _appointmentRepository.deleteReservedAppointment(reservedAppointment);
+            Debug.WriteLine("POSLE BRISANJA");
+
         }
 
         public void addAppointmentFromTable(int id,String patient)

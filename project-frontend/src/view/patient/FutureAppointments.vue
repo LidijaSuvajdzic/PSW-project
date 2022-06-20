@@ -19,15 +19,46 @@
                   <td>{{appointment.DateFrom}}</td>
                   <td>{{appointment.DateTo}}</td>
                <td>{{appointment.Doctor}}</td>
+               <td><button  data-target="#cancel" data-toggle="modal" @click="SaveId(appointment.Id)">Cancel</button></td>
            </tr> 
     </tbody>
 </table>
  <button @click="GoBack()">Go back</button>
     </div>
+
+            <div class="modal fade" id="cancel" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5
+              class="modal-title"
+              id="exampleModalLabel"
+              style="color: #0b4025; padding: 5px 35px"
+            >
+              Are you sure about cancelling the appointment?
+            </h5>
+          </div>
+          <div class="modal-body" style="padding: 15px 50px">
+            <form role="form">
+              <button
+                type="submit"
+                class="btn btn-success btn-block"
+                @click="Cancel()"
+              >
+                <span></span> Cancel the appointment
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 </template>
 
 <script>
 import NavBarAppointments from '../../components/NavBarAppointments.vue';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default {
     name: "FutureAppointments",
@@ -38,7 +69,8 @@ export default {
         return {
             appointments: "",
             appointment: { Id: 0, DateFrom: "", DateTo: "", DoctorsFirstname: "", DoctorsLastname: "" },
-            firstname:""
+            firstname:"",
+            id:0,
         };
     },
     methods: {
@@ -50,7 +82,25 @@ export default {
         },
         async GoBack(){
             this.$router.push({ name: "StartPagePatient" });
+        },
+                async SaveId(id) {
+            this.id = id;
+        },
+        async Cancel() {
+      const headers ={
+        "Content-type": "application/json",
+      }; 
+      axios.delete("http://localhost:58025/api/appointment/delete/"+this.id, {headers}) 
+                    .catch( function (error) {
+        if (error.response.status == 400) {
+         return new Swal({
+             title:"Warning",
+             type: "warning",
+             text:'You can not cancel the appointment!'
+           });}
+      })   
         }
+
     },
     async created() {
         this.appointments= await this.findFutureAppointments();

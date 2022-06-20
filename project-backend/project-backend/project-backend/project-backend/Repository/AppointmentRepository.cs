@@ -143,6 +143,20 @@ namespace project_backend.Repository
                 _context.SaveChanges();
             }
         }
+
+        public FreeAppointment findAppoinmentByDate(DateTime dateFrom, DateTime dateTo)
+        {
+            FreeAppointment freeAppointment = (from s in _context.freeAppointments
+                                      where s.DateFrom==dateFrom && s.DateTo==dateTo
+                                      select s).FirstOrDefault<FreeAppointment>();
+            return freeAppointment;
+        }
+
+        internal void deleteReservedAppointment(ReservedAppointment reservedAppointment)
+        {
+            _context.reservedAppointments.Remove(reservedAppointment);
+            _context.SaveChanges();
+        }
     }
 }
 
