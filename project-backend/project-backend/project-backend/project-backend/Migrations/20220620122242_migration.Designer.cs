@@ -10,8 +10,8 @@ using project_backend.Models;
 namespace project_backend.Migrations
 {
     [DbContext(typeof(MyWebApiContext))]
-    [Migration("20220620014753_third")]
-    partial class third
+    [Migration("20220620122242_migration")]
+    partial class migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,7 +41,7 @@ namespace project_backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("appointmentFeedbacks");
+                    b.ToTable("appointmentFeedback");
                 });
 
             modelBuilder.Entity("project_backend.Models.FreeAppointment", b =>
@@ -156,12 +156,44 @@ namespace project_backend.Migrations
                     b.Property<bool>("IsAnonymously")
                         .HasColumnName("isAnonymously");
 
+                    b.Property<bool>("IsPosted")
+                        .HasColumnName("isAPosted");
+
                     b.Property<int>("PatientId")
                         .HasColumnName("patientId");
 
                     b.HasKey("Id");
 
-                    b.ToTable("hospitalFeedbacks");
+                    b.ToTable("hospitalFeedback");
+                });
+
+            modelBuilder.Entity("project_backend.Models.Referral", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("DateFrom")
+                        .HasColumnName("dateFrom");
+
+                    b.Property<DateTime>("DateTo")
+                        .HasColumnName("dateTo");
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnName("doctorId");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnName("patientId");
+
+                    b.Property<string>("Reason")
+                        .HasColumnName("reason");
+
+                    b.Property<int>("SpecialistId")
+                        .HasColumnName("specialistId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("referrals");
                 });
 
             modelBuilder.Entity("project_backend.Models.ReservedAppointment", b =>
@@ -205,11 +237,17 @@ namespace project_backend.Migrations
                     b.Property<int>("HealthCardNumber")
                         .HasColumnName("healthcardnumber");
 
+                    b.Property<bool>("IsBlocked")
+                        .HasColumnName("isBlocked");
+
                     b.Property<string>("Lastname")
                         .HasColumnName("lastname");
 
                     b.Property<string>("Passwordd")
                         .HasColumnName("password");
+
+                    b.Property<int>("Penals")
+                        .HasColumnName("penals");
 
                     b.Property<string>("Role")
                         .HasColumnName("role");
@@ -225,8 +263,10 @@ namespace project_backend.Migrations
                             Email = "suvajdziclidija@gmail.com",
                             Firstname = "Lidija",
                             HealthCardNumber = 1234567890,
+                            IsBlocked = false,
                             Lastname = "Suvajdzic",
                             Passwordd = "1234567890",
+                            Penals = 0,
                             Role = "ADMIN"
                         },
                         new
@@ -235,8 +275,10 @@ namespace project_backend.Migrations
                             Email = "draganaarsin97@gmail.com",
                             Firstname = "Dragana",
                             HealthCardNumber = 987654321,
+                            IsBlocked = false,
                             Lastname = "Arsin",
                             Passwordd = "1234567890",
+                            Penals = 0,
                             Role = "DOCTOR"
                         },
                         new
@@ -245,8 +287,10 @@ namespace project_backend.Migrations
                             Email = "milicaperic@gmail.com",
                             Firstname = "Milica",
                             HealthCardNumber = 111154321,
+                            IsBlocked = false,
                             Lastname = "Peric",
                             Passwordd = "1234567890",
+                            Penals = 0,
                             Role = "DOCTOR"
                         },
                         new
@@ -255,8 +299,10 @@ namespace project_backend.Migrations
                             Email = "simonidasimic@gmail.com",
                             Firstname = "Simonida",
                             HealthCardNumber = 982222321,
+                            IsBlocked = false,
                             Lastname = "Simic",
                             Passwordd = "1234567890",
+                            Penals = 0,
                             Role = "DOCTOR"
                         },
                         new
@@ -265,8 +311,10 @@ namespace project_backend.Migrations
                             Email = "sanja@gmail.com",
                             Firstname = "Sanja",
                             HealthCardNumber = 111154321,
+                            IsBlocked = false,
                             Lastname = "Peric",
                             Passwordd = "1234567890",
+                            Penals = 0,
                             Role = "SPECIALIST"
                         },
                         new
@@ -275,9 +323,35 @@ namespace project_backend.Migrations
                             Email = "stefan@gmail.com",
                             Firstname = "Stefan",
                             HealthCardNumber = 982222321,
+                            IsBlocked = false,
                             Lastname = "Simic",
                             Passwordd = "1234567890",
+                            Penals = 0,
                             Role = "SPECIALIST"
+                        },
+                        new
+                        {
+                            UserId = 7,
+                            Email = "kristina@gmail.com",
+                            Firstname = "Kristina",
+                            HealthCardNumber = 111154321,
+                            IsBlocked = false,
+                            Lastname = "Peric",
+                            Passwordd = "1234567890",
+                            Penals = 0,
+                            Role = "PATIENT"
+                        },
+                        new
+                        {
+                            UserId = 8,
+                            Email = "esma@gmail.com",
+                            Firstname = "Esma",
+                            HealthCardNumber = 982222321,
+                            IsBlocked = false,
+                            Lastname = "Simic",
+                            Passwordd = "1234567890",
+                            Penals = 0,
+                            Role = "PATIENT"
                         });
                 });
 #pragma warning restore 612, 618

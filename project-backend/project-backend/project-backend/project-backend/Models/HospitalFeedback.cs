@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace project_backend.Models
 {
-    [Table("hospitalFeedbacks")]
+    [Table("hospitalFeedback")]
     public class HospitalFeedback
     {
         [Column("Id")]
@@ -20,5 +20,7 @@ namespace project_backend.Models
         public String Comment { get; set; }
         [Column("isAnonymously")]
         public bool IsAnonymously { get; set; }
+        [Column("isAPosted")]
+        public bool IsPosted { get; set; }
     }
 }

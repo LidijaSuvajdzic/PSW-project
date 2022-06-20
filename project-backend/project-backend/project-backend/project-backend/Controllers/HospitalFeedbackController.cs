@@ -18,7 +18,36 @@ namespace project_backend.Controllers
         public IActionResult addAppointmentFeedback([FromBody] HospitalFeedbackDTO hospitalFeedbackDTO)
         {
             HospitalFeedbackService hospitalFeedbackService = new HospitalFeedbackService();
-            hospitalFeedbackService.addAppointmentFeedback(hospitalFeedbackDTO);
+            hospitalFeedbackService.addHospitalFeedbackFeedback(hospitalFeedbackDTO);
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("getAll")]
+        public IActionResult getAll()
+        {
+            HospitalFeedbackService hospitalFeedbackService = new HospitalFeedbackService();
+            List<HospitalFeedbackDTO> list = hospitalFeedbackService.GetAllHospitalFeedback();
+            return Ok(list);
+        }
+
+        [HttpPost]
+        [Route("setPublic/{id}")]
+        public IActionResult setPublic(String id)
+        {
+            int ID = Int32.Parse(id);
+            HospitalFeedbackService hospitalFeedbackService = new HospitalFeedbackService();
+            hospitalFeedbackService.setPublic(ID);
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("removePublic/{id}")]
+        public IActionResult removePublic(String id)
+        {
+            int ID = Int32.Parse(id);
+            HospitalFeedbackService hospitalFeedbackService = new HospitalFeedbackService();
+            hospitalFeedbackService.removePublic(ID);
             return Ok();
         }
 

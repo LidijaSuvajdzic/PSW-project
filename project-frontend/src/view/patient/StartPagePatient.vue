@@ -2,7 +2,7 @@
 <div><button @click="MakeAnAppointment()">Make an appointment</button></div>
 <div><button @click="SeeAllAppointments()">See your appointments</button></div>
 <div><button @click="LeaveFeedback()">Leave feedback</button></div>
-
+<div><button @click="SeeFeedback()">See feedback</button></div>
 
 
 <div><button @click="MakeAReferral()">Make an appointment by a specialist</button></div>
@@ -38,6 +38,9 @@ export default {
     },
     async MakeAReferral() {
       this.$router.push({ name: "MakeAReferral" });
+    },
+    async SeeFeedback() {
+      this.$router.push({ name: "SeeFeedback" });
     }
   },
   async created() {

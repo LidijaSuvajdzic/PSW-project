@@ -14,7 +14,7 @@ namespace project_backend.Adapter
             HospitalFeedback hospitalFeedback = new HospitalFeedback();
             hospitalFeedback.Comment = hospitalFeedbackDTO.Comment;
             hospitalFeedback.Grade = Int32.Parse(hospitalFeedbackDTO.Grade);
-            if (hospitalFeedbackDTO.IsAnonymously == "Yes")
+            if (hospitalFeedbackDTO.IsAnonymously)
             {
                 hospitalFeedback.IsAnonymously = true;
             }
@@ -24,5 +24,7 @@ namespace project_backend.Adapter
 
             return hospitalFeedback;
         }
+
+
     }
 }

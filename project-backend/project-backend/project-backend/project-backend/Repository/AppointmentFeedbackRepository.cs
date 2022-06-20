@@ -21,14 +21,14 @@ namespace project_backend.Repository
         {
             if (appointmentFeedback != null)
             {
-                _context.appointmentFeedbacks.Add(appointmentFeedback);
+                _context.appointmentFeedback.Add(appointmentFeedback);
                 _context.SaveChanges();
             }
         }
 
         public List<AppointmentFeedback> GetAllAppointmentFeedbacks()
         {
-            return _context.appointmentFeedbacks.ToList();
+            return _context.appointmentFeedback.ToList();
         }
 
         private bool disposed = false;

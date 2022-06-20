@@ -39,7 +39,7 @@ namespace project_backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("appointmentFeedbacks");
+                    b.ToTable("appointmentFeedback");
                 });
 
             modelBuilder.Entity("project_backend.Models.FreeAppointment", b =>
@@ -154,12 +154,15 @@ namespace project_backend.Migrations
                     b.Property<bool>("IsAnonymously")
                         .HasColumnName("isAnonymously");
 
+                    b.Property<bool>("IsPosted")
+                        .HasColumnName("isAPosted");
+
                     b.Property<int>("PatientId")
                         .HasColumnName("patientId");
 
                     b.HasKey("Id");
 
-                    b.ToTable("hospitalFeedbacks");
+                    b.ToTable("hospitalFeedback");
                 });
 
             modelBuilder.Entity("project_backend.Models.Referral", b =>
@@ -232,11 +235,17 @@ namespace project_backend.Migrations
                     b.Property<int>("HealthCardNumber")
                         .HasColumnName("healthcardnumber");
 
+                    b.Property<bool>("IsBlocked")
+                        .HasColumnName("isBlocked");
+
                     b.Property<string>("Lastname")
                         .HasColumnName("lastname");
 
                     b.Property<string>("Passwordd")
                         .HasColumnName("password");
+
+                    b.Property<int>("Penals")
+                        .HasColumnName("penals");
 
                     b.Property<string>("Role")
                         .HasColumnName("role");
@@ -252,8 +261,10 @@ namespace project_backend.Migrations
                             Email = "suvajdziclidija@gmail.com",
                             Firstname = "Lidija",
                             HealthCardNumber = 1234567890,
+                            IsBlocked = false,
                             Lastname = "Suvajdzic",
                             Passwordd = "1234567890",
+                            Penals = 0,
                             Role = "ADMIN"
                         },
                         new
@@ -262,8 +273,10 @@ namespace project_backend.Migrations
                             Email = "draganaarsin97@gmail.com",
                             Firstname = "Dragana",
                             HealthCardNumber = 987654321,
+                            IsBlocked = false,
                             Lastname = "Arsin",
                             Passwordd = "1234567890",
+                            Penals = 0,
                             Role = "DOCTOR"
                         },
                         new
@@ -272,8 +285,10 @@ namespace project_backend.Migrations
                             Email = "milicaperic@gmail.com",
                             Firstname = "Milica",
                             HealthCardNumber = 111154321,
+                            IsBlocked = false,
                             Lastname = "Peric",
                             Passwordd = "1234567890",
+                            Penals = 0,
                             Role = "DOCTOR"
                         },
                         new
@@ -282,8 +297,10 @@ namespace project_backend.Migrations
                             Email = "simonidasimic@gmail.com",
                             Firstname = "Simonida",
                             HealthCardNumber = 982222321,
+                            IsBlocked = false,
                             Lastname = "Simic",
                             Passwordd = "1234567890",
+                            Penals = 0,
                             Role = "DOCTOR"
                         },
                         new
@@ -292,8 +309,10 @@ namespace project_backend.Migrations
                             Email = "sanja@gmail.com",
                             Firstname = "Sanja",
                             HealthCardNumber = 111154321,
+                            IsBlocked = false,
                             Lastname = "Peric",
                             Passwordd = "1234567890",
+                            Penals = 0,
                             Role = "SPECIALIST"
                         },
                         new
@@ -302,8 +321,10 @@ namespace project_backend.Migrations
                             Email = "stefan@gmail.com",
                             Firstname = "Stefan",
                             HealthCardNumber = 982222321,
+                            IsBlocked = false,
                             Lastname = "Simic",
                             Passwordd = "1234567890",
+                            Penals = 0,
                             Role = "SPECIALIST"
                         },
                         new
@@ -312,8 +333,10 @@ namespace project_backend.Migrations
                             Email = "kristina@gmail.com",
                             Firstname = "Kristina",
                             HealthCardNumber = 111154321,
+                            IsBlocked = false,
                             Lastname = "Peric",
                             Passwordd = "1234567890",
+                            Penals = 0,
                             Role = "PATIENT"
                         },
                         new
@@ -322,8 +345,10 @@ namespace project_backend.Migrations
                             Email = "esma@gmail.com",
                             Firstname = "Esma",
                             HealthCardNumber = 982222321,
+                            IsBlocked = false,
                             Lastname = "Simic",
                             Passwordd = "1234567890",
+                            Penals = 0,
                             Role = "PATIENT"
                         });
                 });

@@ -38,6 +38,8 @@ namespace project_backend.Service
         public void Register(User user)
         {
             user.UserId = GenerateId();
+            user.Penals = 0;
+            user.IsBlocked = false;
             _userRepository.AddUser(user);
         }
 

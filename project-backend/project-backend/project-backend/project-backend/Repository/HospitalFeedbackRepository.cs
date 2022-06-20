@@ -20,14 +20,26 @@ namespace project_backend.Repository
         {
             if (hospitalFeedback != null)
             {
-                _context.hospitalFeedbacks.Add(hospitalFeedback);
+                _context.hospitalFeedback.Add(hospitalFeedback);
                 _context.SaveChanges();
             }
         }
 
+        public HospitalFeedback  FindById(int id)
+        {
+            HospitalFeedback hospitalFeedback= _context.hospitalFeedback.Find(id);
+            return hospitalFeedback;
+        }
+
+        public void UpdateHospitalFeedback(HospitalFeedback hospitalFeedback)
+        {
+            _context.hospitalFeedback.Update(hospitalFeedback);
+            _context.SaveChanges();
+        }
+
         public List<HospitalFeedback> GetAllHospitalFeedbacks()
         {
-            return _context.hospitalFeedbacks.ToList();
+            return _context.hospitalFeedback.ToList();
         }
 
         private bool disposed = false;

@@ -32,17 +32,50 @@ namespace project_backend.Service
             _userRepository = userRepository;
         }
 
-        public void addAppointmentFeedback(HospitalFeedbackDTO hospitalFeedbackDTO)
+        internal void setPublic(int id)
+        {
+            HospitalFeedback hospitalFeedback= _hospitalFeedbackRepository.FindById(id);
+            hospitalFeedback.IsPosted = true;
+            _hospitalFeedbackRepository.UpdateHospitalFeedback(hospitalFeedback);
+        }
+
+        public void addHospitalFeedbackFeedback(HospitalFeedbackDTO hospitalFeedbackDTO)
         {
             HospitalFeedback hospitalFeedback = HospitalFeedbackAdapter.HospitalFeedbackDTOToHospitalFeedback(hospitalFeedbackDTO);
             User patient = _userRepository.FindUserByFirstname(hospitalFeedbackDTO.PatientName);
             hospitalFeedback.PatientId = patient.UserId;
             hospitalFeedback.Id = GenerateId();
-      
+            hospitalFeedback.IsPosted = false;
 
             _hospitalFeedbackRepository.AddHospitalFeedback(hospitalFeedback);
         }
 
+        internal void removePublic(int id)
+        {
+            HospitalFeedback hospitalFeedback = _hospitalFeedbackRepository.FindById(id);
+            hospitalFeedback.IsPosted = false;
+            _hospitalFeedbackRepository.UpdateHospitalFeedback(hospitalFeedback);
+        }
+
+        public List<HospitalFeedbackDTO> GetAllHospitalFeedback()
+        {
+            List<HospitalFeedback> hospitalFeedback =  _hospitalFeedbackRepository.GetAllHospitalFeedbacks();
+            List<HospitalFeedbackDTO> dTOs = new List<HospitalFeedbackDTO>();
+            foreach(HospitalFeedback h in hospitalFeedback)
+            {
+                HospitalFeedbackDTO dto = new HospitalFeedbackDTO();
+                dto.Grade = h.Grade.ToString();
+                dto.Comment = h.Comment;
+                User patient = _userRepository.FindUserById(h.PatientId);
+                dto.PatientName = patient.Firstname;
+                dto.PatientLastname = patient.Lastname;
+                dto.IsAnonymously = h.IsAnonymously;
+                dto.Id = h.Id;
+                dto.IsPosted = h.IsPosted;
+                dTOs.Add(dto);
+            }
+            return dTOs;
+        }
 
         public int GenerateId()
         {

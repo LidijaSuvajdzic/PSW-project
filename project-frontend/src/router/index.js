@@ -7,6 +7,7 @@ import AllAppointments from "../view/patient/AllAppointments"
 import FutureAppointments from "../view/patient/FutureAppointments"
 import LeaveFeedback from "../view/patient/LeaveFeedback"
 import MakeAReferral from "../view/patient/MakeAReferral"
+import SeeFeedback from "../view/administrator/SeeFeedback"
 const routes = [
 
   {
@@ -18,6 +19,11 @@ const routes = [
     path: "/StartPagePatient",
     name: "StartPagePatient",
     component: StartPagePatient,
+  },
+  {
+    path: "/SeeFeedback",
+    name: "SeeFeedback",
+    component: SeeFeedback,
   },
   {
     path: "/MakeAReferral",

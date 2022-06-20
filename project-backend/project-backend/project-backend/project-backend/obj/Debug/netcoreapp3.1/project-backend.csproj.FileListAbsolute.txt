@@ -14,7 +14,6 @@ C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-back
 C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-backend\project-backend\bin\Debug\netcoreapp3.1\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-backend\project-backend\bin\Debug\netcoreapp3.1\Remotion.Linq.dll
 C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-backend\project-backend\bin\Debug\netcoreapp3.1\System.Interactive.Async.dll
-C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-backend\project-backend\obj\Debug\netcoreapp3.1\project-backend.csproj.AssemblyReference.cache
 C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-backend\project-backend\obj\Debug\netcoreapp3.1\project-backend.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-backend\project-backend\obj\Debug\netcoreapp3.1\project-backend.AssemblyInfoInputs.cache
 C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-backend\project-backend\obj\Debug\netcoreapp3.1\project-backend.AssemblyInfo.cs
@@ -43,3 +42,4 @@ C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-back
 C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-backend\project-backend\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
 C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-backend\project-backend\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
 C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-backend\project-backend\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-backend\project-backend\obj\Debug\netcoreapp3.1\project-backend.csproj.AssemblyReference.cache

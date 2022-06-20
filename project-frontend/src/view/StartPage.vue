@@ -26,7 +26,29 @@
     </ul>
   </nav>
 <img src="https://www.securitymagazine.com/ext/resources/secenews/2018/hosp-900.jpg?1515062945" alt="Trulli" />
-
+       <table class="styled-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Pacijent</th>
+            <th>Ocena</th>
+            <th>Komentar</th> 
+            <th>Does user is anonymously?</th>
+            <th></th>         
+        </tr>
+    </thead>
+    <tbody>
+          <tr v-for="(fb, index) in feedback" :key="index" >
+               <td v-if="fb.IsPosted == true">{{fb.Id}}</td>
+               <td v-if="fb.IsAnonymously == true && fb.IsPosted == true">Anonymous</td><td v-if="fb.IsAnonymously == false && fb.IsPosted == true">{{fb.PatientName}} {{fb.PatientLastname}}</td>
+               <td v-if="fb.IsPosted == true">{{fb.Grade}}</td>
+               <td v-if="fb.IsPosted == true">{{fb.Comment}}</td>
+               <td v-if="fb.IsPosted == true">{{fb.IsAnonymously}}</td>
+               <td v-if="fb.IsPosted == true">
+               </td>
+           </tr> 
+    </tbody>
+</table>
 
 
 
@@ -44,26 +66,26 @@
             </h5>
           </div>
           <div class="modal-body" style="padding: 15px 50px">
-            <form role="form" @submit.prevent="Login">
+            <form role="form">
               <div class="form-group">
                 <label for="name">E-mail:</label>
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="Unesite Vas e-mail"
+                  placeholder="Enter your email!"
                   v-model="email"
                 />
               </div>
               <div class="form-group">
                 <label for="psw"
                   ><span class="glyphicon glyphicon-eye-open"></span>
-                  Lozinka:</label
+                  Password:</label
                 >
                 <input
                   type="password"
                   class="form-control"
                   id="psw"
-                  placeholder="Unesite lozinku"
+                  placeholder="Enter your password"
                   v-model="password"
                 />
               </div>
@@ -157,12 +179,19 @@ export default {
       password:"",
       passwordAgain:"",
       healthCardNumber:"",
-      role:"PATIENT"
+      role:"PATIENT",
+                  feedback: "",
+            fb: {Id:0, PatientName:"", PatientLastname:"", Grade:0, Comment:"", IsAnonymously:false, IsPosted:false  },
 
     };
   },
 
   methods: {
+            async getFeedback() {
+      const res = await fetch("http://localhost:58025/api/hospitalFeedback/getAll");
+      const data = await res.json();
+      return data;   
+        },
     async Login() {
       console.log(this.email);
       console.log(this.password);
@@ -304,6 +333,9 @@ async Register() {
     }
   
   },
+  async created() {
+this.feedback= await this.getFeedback();
+  }
 };
 </script>
 
@@ -319,5 +351,25 @@ button {
 img {
   width: 100%;
 }
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 20px;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
 
+.styled-table thead tr {
+    background-color: #809cc5;
+    color: #ffffff;
+    text-align: left;
+}
+button {
+  background-color: #809cc5; 
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
 </style>

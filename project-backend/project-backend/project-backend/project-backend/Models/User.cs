@@ -25,5 +25,9 @@ namespace project_backend.Models
         public int HealthCardNumber { get; set; }
         [Column("role")]
         public string Role { get; set; }
+        [Column("isBlocked")]
+        public bool IsBlocked { get; set; }
+        [Column("penals")]
+        public int Penals { get; set; }
     }
 }

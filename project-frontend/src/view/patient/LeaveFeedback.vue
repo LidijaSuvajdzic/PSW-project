@@ -33,24 +33,35 @@ export default {
         return {
             grade:"",
             comment:"",
-            anonymously:""
+            anonymously:"",
+            IsAnonymously:null,
+            id:0,
+            lastname:""
         };
     },
     methods: {
         async AddFeedback() {
             this.firstname = localStorage.getItem("firstname");
+            this.lastname = localStorage.getItem("lastname");
             console.log(this.grade);
             console.log(this.comment);
             console.log(this.firstname);
             console.log(this.anonymously);
+      if(this.anonymously =="Yes") {
+        this.IsAnonymously = true;
+      }else {
+ this.IsAnonymously = false;
+      }
       const headers ={
         "Content-type": "application/json",
       }; 
       axios.post("http://localhost:58025/api/hospitalFeedback/addHospitalFeedback",{ 
+        Id: this.id,
         PatientName: this.firstname,
+        PatientLastname: this.lastname,
         Grade: this.grade,
         Comment:this.comment,
-        IsAnonymously: this.anonymously
+        IsAnonymously: this.IsAnonymously
         }, {headers}) 
         }
     },

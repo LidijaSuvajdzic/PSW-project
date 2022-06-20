@@ -4,12 +4,12 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace project_backend.Migrations
 {
-    public partial class initial : Migration
+    public partial class migration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "appointmentFeedbacks",
+                name: "appointmentFeedback",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -21,7 +21,7 @@ namespace project_backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_appointmentFeedbacks", x => x.Id);
+                    table.PrimaryKey("PK_appointmentFeedback", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -41,7 +41,7 @@ namespace project_backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "hospitalFeedbacks",
+                name: "hospitalFeedback",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -49,11 +49,30 @@ namespace project_backend.Migrations
                     patientId = table.Column<int>(nullable: false),
                     grade = table.Column<int>(nullable: false),
                     comment = table.Column<string>(nullable: true),
-                    isAnonymously = table.Column<bool>(nullable: false)
+                    isAnonymously = table.Column<bool>(nullable: false),
+                    isAPosted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_hospitalFeedbacks", x => x.Id);
+                    table.PrimaryKey("PK_hospitalFeedback", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "referrals",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    patientId = table.Column<int>(nullable: false),
+                    doctorId = table.Column<int>(nullable: false),
+                    specialistId = table.Column<int>(nullable: false),
+                    reason = table.Column<string>(nullable: true),
+                    dateFrom = table.Column<DateTime>(nullable: false),
+                    dateTo = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_referrals", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -84,7 +103,9 @@ namespace project_backend.Migrations
                     email = table.Column<string>(nullable: true),
                     password = table.Column<string>(nullable: true),
                     healthcardnumber = table.Column<int>(nullable: false),
-                    role = table.Column<string>(nullable: true)
+                    role = table.Column<string>(nullable: true),
+                    isBlocked = table.Column<bool>(nullable: false),
+                    penals = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -97,34 +118,45 @@ namespace project_backend.Migrations
                 values: new object[,]
                 {
                     { 1, new DateTime(2022, 6, 20, 13, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 6, 20, 14, 0, 0, 0, DateTimeKind.Unspecified), 2, true },
-                    { 2, new DateTime(2022, 6, 20, 14, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 6, 20, 15, 0, 0, 0, DateTimeKind.Unspecified), 2, true },
-                    { 3, new DateTime(2022, 6, 20, 15, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 6, 20, 16, 0, 0, 0, DateTimeKind.Unspecified), 3, true },
+                    { 8, new DateTime(2022, 3, 20, 13, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 3, 20, 14, 0, 0, 0, DateTimeKind.Unspecified), 6, true },
+                    { 7, new DateTime(2022, 6, 20, 15, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 6, 20, 16, 0, 0, 0, DateTimeKind.Unspecified), 5, true },
+                    { 6, new DateTime(2022, 8, 20, 13, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 8, 20, 14, 0, 0, 0, DateTimeKind.Unspecified), 3, true },
+                    { 9, new DateTime(2022, 8, 20, 13, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 8, 20, 14, 0, 0, 0, DateTimeKind.Unspecified), 5, true },
                     { 4, new DateTime(2022, 6, 20, 15, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 6, 20, 16, 0, 0, 0, DateTimeKind.Unspecified), 4, true },
+                    { 3, new DateTime(2022, 6, 20, 15, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 6, 20, 16, 0, 0, 0, DateTimeKind.Unspecified), 3, true },
+                    { 2, new DateTime(2022, 6, 20, 14, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 6, 20, 15, 0, 0, 0, DateTimeKind.Unspecified), 2, true },
                     { 5, new DateTime(2022, 3, 20, 13, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 3, 20, 14, 0, 0, 0, DateTimeKind.Unspecified), 2, true }
                 });
 
             migrationBuilder.InsertData(
                 table: "users",
-                columns: new[] { "userid", "email", "firstname", "healthcardnumber", "lastname", "password", "role" },
+                columns: new[] { "userid", "email", "firstname", "healthcardnumber", "isBlocked", "lastname", "password", "penals", "role" },
                 values: new object[,]
                 {
-                    { 1, "suvajdziclidija@gmail.com", "Lidija", 1234567890, "Suvajdzic", "1234567890", "ADMIN" },
-                    { 2, "draganaarsin97@gmail.com", "Dragana", 987654321, "Arsin", "1234567890", "DOCTOR" },
-                    { 3, "milicaperic@gmail.com", "Milica", 111154321, "Peric", "1234567890", "DOCTOR" },
-                    { 4, "simonidasimic@gmail.com", "Simonida", 982222321, "Simic", "1234567890", "DOCTOR" }
+                    { 7, "kristina@gmail.com", "Kristina", 111154321, false, "Peric", "1234567890", 0, "PATIENT" },
+                    { 1, "suvajdziclidija@gmail.com", "Lidija", 1234567890, false, "Suvajdzic", "1234567890", 0, "ADMIN" },
+                    { 2, "draganaarsin97@gmail.com", "Dragana", 987654321, false, "Arsin", "1234567890", 0, "DOCTOR" },
+                    { 3, "milicaperic@gmail.com", "Milica", 111154321, false, "Peric", "1234567890", 0, "DOCTOR" },
+                    { 4, "simonidasimic@gmail.com", "Simonida", 982222321, false, "Simic", "1234567890", 0, "DOCTOR" },
+                    { 5, "sanja@gmail.com", "Sanja", 111154321, false, "Peric", "1234567890", 0, "SPECIALIST" },
+                    { 6, "stefan@gmail.com", "Stefan", 982222321, false, "Simic", "1234567890", 0, "SPECIALIST" },
+                    { 8, "esma@gmail.com", "Esma", 982222321, false, "Simic", "1234567890", 0, "PATIENT" }
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "appointmentFeedbacks");
+                name: "appointmentFeedback");
 
             migrationBuilder.DropTable(
                 name: "freeAppointment");
 
             migrationBuilder.DropTable(
-                name: "hospitalFeedbacks");
+                name: "hospitalFeedback");
+
+            migrationBuilder.DropTable(
+                name: "referrals");
 
             migrationBuilder.DropTable(
                 name: "reservedAppointment");

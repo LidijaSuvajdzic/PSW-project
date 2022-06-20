@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace project_backend.Models
 {
-    [Table("appointmentFeedbacks")]
+    [Table("appointmentFeedback")]
 
     public class AppointmentFeedback
     {
