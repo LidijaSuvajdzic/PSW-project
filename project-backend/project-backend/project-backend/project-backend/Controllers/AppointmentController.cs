@@ -73,6 +73,22 @@ namespace project_backend.Controllers
             }
         }
 
+
+
+        
+        [HttpGet]
+        [Route("findAppointments/{selectedDoctor}")]
+        public IActionResult findAppointments(String selectedDoctor)
+        {
+            AppointmentService appointmentService = new AppointmentService();
+            List<FreeAppointmentDTO> lists = appointmentService.findAppointmentBySpecialist(selectedDoctor);
+            return Ok(lists);
+            
+        }
+
+
+
+
         [HttpPost]
         [Route("addAppointment")]
         public IActionResult addAppointment([FromBody] ReservedAppointmentDTO reservedAppointmentDTO)

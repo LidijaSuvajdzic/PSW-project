@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using project_backend.Models;
@@ -9,9 +10,10 @@ using project_backend.Models;
 namespace project_backend.Migrations
 {
     [DbContext(typeof(MyWebApiContext))]
-    partial class MyWebApiContextModelSnapshot : ModelSnapshot
+    [Migration("20220620014753_third")]
+    partial class third
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -162,29 +164,6 @@ namespace project_backend.Migrations
                     b.ToTable("hospitalFeedbacks");
                 });
 
-            modelBuilder.Entity("project_backend.Models.Referral", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("id");
-
-                    b.Property<int>("DoctorId")
-                        .HasColumnName("doctorId");
-
-                    b.Property<int>("PatientId")
-                        .HasColumnName("patientId");
-
-                    b.Property<string>("Reason")
-                        .HasColumnName("reason");
-
-                    b.Property<int>("SpecialistId")
-                        .HasColumnName("specialistId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("referrals");
-                });
-
             modelBuilder.Entity("project_backend.Models.ReservedAppointment", b =>
                 {
                     b.Property<int>("Id")
@@ -299,26 +278,6 @@ namespace project_backend.Migrations
                             Lastname = "Simic",
                             Passwordd = "1234567890",
                             Role = "SPECIALIST"
-                        },
-                        new
-                        {
-                            UserId = 7,
-                            Email = "kristina@gmail.com",
-                            Firstname = "Kristina",
-                            HealthCardNumber = 111154321,
-                            Lastname = "Peric",
-                            Passwordd = "1234567890",
-                            Role = "PATIENT"
-                        },
-                        new
-                        {
-                            UserId = 8,
-                            Email = "esma@gmail.com",
-                            Firstname = "Esma",
-                            HealthCardNumber = 982222321,
-                            Lastname = "Simic",
-                            Passwordd = "1234567890",
-                            Role = "PATIENT"
                         });
                 });
 #pragma warning restore 612, 618

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using project_backend.Models;
@@ -9,9 +10,10 @@ using project_backend.Models;
 namespace project_backend.Migrations
 {
     [DbContext(typeof(MyWebApiContext))]
-    partial class MyWebApiContextModelSnapshot : ModelSnapshot
+    [Migration("20220620015223_next")]
+    partial class next
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -160,29 +162,6 @@ namespace project_backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("hospitalFeedbacks");
-                });
-
-            modelBuilder.Entity("project_backend.Models.Referral", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("id");
-
-                    b.Property<int>("DoctorId")
-                        .HasColumnName("doctorId");
-
-                    b.Property<int>("PatientId")
-                        .HasColumnName("patientId");
-
-                    b.Property<string>("Reason")
-                        .HasColumnName("reason");
-
-                    b.Property<int>("SpecialistId")
-                        .HasColumnName("specialistId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("referrals");
                 });
 
             modelBuilder.Entity("project_backend.Models.ReservedAppointment", b =>

@@ -66,7 +66,7 @@ namespace project_backend.Service
 
         public int GenerateId()
         {
-            int number= _userRepository.GetAllUsers().Count + 1;
+            int number= _userRepository.GetAllUsers().Count + 5;
             return number;
         }
 

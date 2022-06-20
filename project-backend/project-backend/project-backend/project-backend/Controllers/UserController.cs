@@ -62,13 +62,34 @@ namespace project_backend.Controllers
             });
         }
 
-        [AllowAnonymous]
         [Route("findAllDoctors")]
         [HttpGet]
         public IActionResult findAllDoctors()
         {
             UserService userService = new UserService();
             string role = "DOCTOR";
+            List<UserDTO> usersDTO = userService.FindUsersByRole(role);
+
+            return Ok(usersDTO);
+        }
+
+        [Route("findAllSpecialists")]
+        [HttpGet]
+        public IActionResult findAllSpecialists()
+        {
+            UserService userService = new UserService();
+            string role = "SPECIALIST";
+            List<UserDTO> usersDTO = userService.FindUsersByRole(role);
+
+            return Ok(usersDTO);
+        }
+
+        [Route("findAllPatients")]
+        [HttpGet]
+        public IActionResult findAllPatients()
+        {
+            UserService userService = new UserService();
+            string role = "PATIENT";
             List<UserDTO> usersDTO = userService.FindUsersByRole(role);
 
             return Ok(usersDTO);

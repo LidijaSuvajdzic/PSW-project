@@ -260,6 +260,20 @@ namespace project_backend.Service
             return listsDTO;
         }
 
+        public List<FreeAppointmentDTO> findAppointmentBySpecialist(String selestedDoctor) {
+            User specialist = _userRepository.FindUserByFirstname(selestedDoctor.Split(" ")[0]);
+            List<FreeAppointment> list = _appointmentRepository.findAppoinmentsByDoctor(specialist.UserId);
+            List<FreeAppointmentDTO> listDTO = new List<FreeAppointmentDTO>();
+
+            foreach (FreeAppointment fa in list)
+            {
+                FreeAppointmentDTO fDTO = FreeAppointmentAdapter.FreeAppointmentToFreeAppointmentDTO(fa);
+                listDTO.Add(fDTO);
+            }
+
+            return listDTO;
+        }
+
     }
 
 

@@ -15,14 +15,18 @@ namespace project_backend.Models
         public DbSet<AppointmentFeedback> appointmentFeedbacks { get; set; }
         public DbSet<HospitalFeedback> hospitalFeedbacks { get; set; }
 
+        public DbSet<Referral> referrals { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasData(
                 new User { UserId = 1, Firstname = "Lidija", Lastname = "Suvajdzic", Email = "suvajdziclidija@gmail.com", Passwordd = "1234567890", HealthCardNumber = 1234567890, Role = "ADMIN" },
                 new User { UserId = 2, Firstname = "Dragana", Lastname = "Arsin", Email = "draganaarsin97@gmail.com", Passwordd = "1234567890", HealthCardNumber = 0987654321, Role = "DOCTOR" },
                 new User { UserId = 3, Firstname = "Milica", Lastname = "Peric", Email = "milicaperic@gmail.com", Passwordd = "1234567890", HealthCardNumber = 0111154321, Role = "DOCTOR" },
-                new User { UserId = 4, Firstname = "Simonida", Lastname = "Simic", Email = "simonidasimic@gmail.com", Passwordd = "1234567890", HealthCardNumber = 0982222321, Role = "DOCTOR" }
-
+                new User { UserId = 4, Firstname = "Simonida", Lastname = "Simic", Email = "simonidasimic@gmail.com", Passwordd = "1234567890", HealthCardNumber = 0982222321, Role = "DOCTOR" },
+               new User { UserId = 5, Firstname = "Sanja", Lastname = "Peric", Email = "sanja@gmail.com", Passwordd = "1234567890", HealthCardNumber = 0111154321, Role = "SPECIALIST" },
+                new User { UserId =6, Firstname = "Stefan", Lastname = "Simic", Email = "stefan@gmail.com", Passwordd = "1234567890", HealthCardNumber = 0982222321, Role = "SPECIALIST" },
+                new User { UserId = 7, Firstname = "Kristina", Lastname = "Peric", Email = "kristina@gmail.com", Passwordd = "1234567890", HealthCardNumber = 0111154321, Role = "PATIENT" },
+                new User { UserId = 8, Firstname = "Esma", Lastname = "Simic", Email = "esma@gmail.com", Passwordd = "1234567890", HealthCardNumber = 0982222321, Role = "PATIENT" }
             );
 
             modelBuilder.Entity<FreeAppointment>().HasData(
@@ -85,6 +89,36 @@ namespace project_backend.Models
                     DateTo = DateTime.ParseExact("2022-08-20 14:00:00", "yyyy-MM-dd HH:mm:ss",
                                        System.Globalization.CultureInfo.InvariantCulture),
                     DoctorId = 3,
+                    IsFree = true
+                },
+                new FreeAppointment
+                {
+                    Id = 7,
+                    DateFrom = DateTime.ParseExact("2022-06-20 15:00:00", "yyyy-MM-dd HH:mm:ss",
+                                       System.Globalization.CultureInfo.InvariantCulture),
+                    DateTo = DateTime.ParseExact("2022-06-20 16:00:00", "yyyy-MM-dd HH:mm:ss",
+                                       System.Globalization.CultureInfo.InvariantCulture),
+                    DoctorId = 5,
+                    IsFree = true
+                },
+                new FreeAppointment
+                {
+                    Id = 8,
+                    DateFrom = DateTime.ParseExact("2022-03-20 13:00:00", "yyyy-MM-dd HH:mm:ss",
+                                       System.Globalization.CultureInfo.InvariantCulture),
+                    DateTo = DateTime.ParseExact("2022-03-20 14:00:00", "yyyy-MM-dd HH:mm:ss",
+                                       System.Globalization.CultureInfo.InvariantCulture),
+                    DoctorId = 6,
+                    IsFree = true
+                },
+                new FreeAppointment
+                {
+                    Id = 9,
+                    DateFrom = DateTime.ParseExact("2022-08-20 13:00:00", "yyyy-MM-dd HH:mm:ss",
+                                       System.Globalization.CultureInfo.InvariantCulture),
+                    DateTo = DateTime.ParseExact("2022-08-20 14:00:00", "yyyy-MM-dd HH:mm:ss",
+                                       System.Globalization.CultureInfo.InvariantCulture),
+                    DoctorId = 5,
                     IsFree = true
                 }
             );
