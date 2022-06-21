@@ -1,6 +1,0 @@
-C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-backend\Pharmacy\obj\Debug\netcoreapp3.1\Pharmacy.csproj.AssemblyReference.cache
-C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-backend\Pharmacy\obj\Debug\netcoreapp3.1\Pharmacy.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-backend\Pharmacy\obj\Debug\netcoreapp3.1\Pharmacy.AssemblyInfoInputs.cache
-C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-backend\Pharmacy\obj\Debug\netcoreapp3.1\Pharmacy.AssemblyInfo.cs
-C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-backend\Pharmacy\obj\Debug\netcoreapp3.1\Pharmacy.csproj.CoreCompileInputs.cache
-C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\project-backend\Pharmacy\obj\Debug\netcoreapp3.1\Pharmacy.MvcApplicationPartsAssemblyInfo.cache

@@ -10,6 +10,7 @@ import MakeAReferral from "../view/patient/MakeAReferral"
 import SeeFeedback from "../view/administrator/SeeFeedback"
 import SeeMaliciousUsers from "../view/administrator/SeeMaliciousUsers"
 import SeeBlockedUsers from "../view/administrator/SeeBlockedUsers"
+import CreatePrescription from "../view/doctor/CreatePrescription"
 const routes = [
 
   {
@@ -21,6 +22,11 @@ const routes = [
     path: "/StartPagePatient",
     name: "StartPagePatient",
     component: StartPagePatient,
+  },
+  {
+    path: "/CreatePrescription",
+    name: "CreatePrescription",
+    component: CreatePrescription,
   },
   {
     path: "/SeeBlockedUsers",

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\Lidija\Desktop\PSW-project\project-backend\project-backend\pharmacy-backend\project-backend\project-backend\bin\Release\netcoreapp3.1\publish\</_PublishTargetUrl>
+    <History>True|2022-06-21T13:53:20.9126386Z;True|2022-06-21T15:29:08.7968947+02:00;True|2022-06-21T14:58:35.8048684+02:00;True|2022-06-21T14:57:52.8142853+02:00;True|2022-06-21T14:54:46.5046073+02:00;True|2022-06-21T14:53:33.6320528+02:00;False|2022-06-21T14:51:57.9339165+02:00;True|2022-06-21T14:50:39.4084904+02:00;True|2022-06-21T14:50:21.0779823+02:00;True|2022-06-21T14:47:30.9485720+02:00;True|2022-06-21T14:44:26.8462537+02:00;True|2022-06-21T14:40:58.7904793+02:00;True|2022-06-21T14:39:35.8599847+02:00;True|2022-06-21T14:29:06.1263043+02:00;True|2022-06-21T14:28:52.6723578+02:00;True|2022-06-21T14:26:53.1879536+02:00;True|2022-06-21T14:03:26.5803900+02:00;True|2022-06-21T14:00:13.7427557+02:00;True|2022-06-21T13:52:21.1395963+02:00;True|2022-06-21T13:44:36.0965448+02:00;True|2022-06-21T13:38:01.5812075+02:00;</History>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+  </PropertyGroup>
+</Project>
