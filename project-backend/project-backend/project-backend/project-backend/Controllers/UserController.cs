@@ -44,6 +44,10 @@ namespace project_backend.Controllers
                 return BadRequest();
             }
 
+            bool isBlocked = userService.isBlocked(loginUserDTO.Email, loginUserDTO.Passwordd);
+            if (isBlocked) {
+                return BadRequest();
+            }
             var userDTO = UserAdapter.UserToUserDTO((Models.User)userService.Authenticate(loginUserDTO.Email, loginUserDTO.Passwordd));  
 
             if (userDTO == null)

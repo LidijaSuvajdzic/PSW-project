@@ -44,6 +44,17 @@ namespace project_backend.Service
             _userRepository.AddUser(user);
         }
 
+        public bool isBlocked(string email, string passwordd)
+        {
+            bool isBlocked = false;
+            User u = _userRepository.FindUserByEmail(email);
+            if (u.IsBlocked)
+            {
+                isBlocked = true;
+            }
+            return isBlocked;
+        }
+
         public bool IsUserExist(string email)
         {
             bool isExists = false;
@@ -62,10 +73,6 @@ namespace project_backend.Service
                 return u;
             }
             if (u.Passwordd != passwordd) {
-                u = null;
-            }
-            if (u.IsBlocked)
-            {
                 u = null;
             }
             return u;
