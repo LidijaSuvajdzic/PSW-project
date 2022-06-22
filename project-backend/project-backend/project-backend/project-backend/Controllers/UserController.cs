@@ -19,6 +19,7 @@ namespace project_backend.Controllers
             _configuration = configuration;
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Register([FromBody] UserDTO newUser)
         {
@@ -71,7 +72,7 @@ namespace project_backend.Controllers
         public IActionResult findAllDoctors()
         {
             UserService userService = new UserService();
-            string role = "DOCTOR";
+            string role = "ROLE_DOCTOR";
             List<UserDTO> usersDTO = userService.FindUsersByRole(role);
 
             return Ok(usersDTO);
@@ -131,7 +132,7 @@ namespace project_backend.Controllers
         public IActionResult findAllSpecialists()
         {
             UserService userService = new UserService();
-            string role = "SPECIALIST";
+            string role = "ROLE_SPECIALIST";
             List<UserDTO> usersDTO = userService.FindUsersByRole(role);
 
             return Ok(usersDTO);
@@ -142,7 +143,7 @@ namespace project_backend.Controllers
         public IActionResult findAllPatients()
         {
             UserService userService = new UserService();
-            string role = "PATIENT";
+            string role = "ROLE_PATIENT";
             List<UserDTO> usersDTO = userService.FindUsersByRole(role);
 
             return Ok(usersDTO);

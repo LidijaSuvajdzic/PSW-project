@@ -1,0 +1,6 @@
+Referral letter:
+Patient:Esma Simic
+Specialist:Stefan Simic
+Doctor who prescribed the referral letter:Dragana Arsin
+Reason:Snimak pokazuje prelom ruke
+Date and time:DATE FROM3/22/2022 1:00:00 PM-DATE TO3/22/2022 2:00:00 PM

@@ -162,7 +162,7 @@ namespace project_backend.Service
 
         public int GenerateId()
         {
-            int number = _appointmentRepository.GetAllReservedAppointments().Count + 10;
+            int number = _appointmentRepository.GetAllReservedAppointments().Count + 15;
             return number;
         }
 

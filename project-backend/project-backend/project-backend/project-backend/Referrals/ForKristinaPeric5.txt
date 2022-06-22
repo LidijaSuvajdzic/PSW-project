@@ -1,0 +1,6 @@
+Referral letter:
+Patient:Kristina Peric
+Specialist:Sanja Peric
+Doctor who prescribed the referral letter:Simonida Simic
+Reason:radiii li
+Date and time:DATE FROM6/29/2022 3:00:00 PM-DATE TO6/29/2022 4:00:00 PM

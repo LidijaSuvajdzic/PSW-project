@@ -1,0 +1,3 @@
+obj\Debug\netcoreapp3.1/NetGrpcService.cs \
+obj\Debug\netcoreapp3.1/NetGrpcServiceGrpc.cs: Protos/model.proto\
+ Protos/netGrpcService.proto

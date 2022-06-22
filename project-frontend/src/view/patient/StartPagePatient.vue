@@ -1,16 +1,16 @@
 <template>
-<div><button @click="MakeAnAppointment()">Make an appointment</button></div>
-<div><button @click="SeeAllAppointments()">See your appointments</button></div>
-<div><button @click="LeaveFeedback()">Leave feedback</button></div>
-<div><button @click="SeeFeedback()">See feedback</button></div>
+<div><button  v-if="this.role == 'ROLE_PATIENT'" @click="MakeAnAppointment()">Make an appointment</button></div>
+<div><button  v-if="this.role == 'ROLE_PATIENT' " @click="SeeAllAppointments()">See your appointments</button></div>
+<div><button  v-if="this.role == 'ROLE_PATIENT' " @click="LeaveFeedback()">Leave feedback</button></div>
+<div><button  v-if="this.role == 'ROLE_ADMIN' " @click="SeeFeedback()">See feedback</button></div>
 
 
-<div><button @click="MakeAReferral()">Make an appointment by a specialist</button></div>
-<div><button @click="CreatePrescription()">Create a prescription</button></div>
+<div><button  v-if="this.role == 'ROLE_DOCTOR'"  @click="MakeAReferral()">Make an appointment by a specialist</button></div>
+<div><button  v-if="this.role == 'ROLE_DOCTOR'" @click="CreatePrescription()">Create a prescription</button></div>
 
 
-<div><button @click="SeeMaliciousUsers()">See potentially malicious users</button></div>
-<div><button @click="SeeBlockedUsers()">See blocked users</button></div>
+<div><button  v-if="this.role == 'ROLE_ADMIN'" @click="SeeMaliciousUsers()">See potentially malicious users</button></div>
+<div><button  v-if="this.role == 'ROLE_ADMIN'" @click="SeeBlockedUsers()">See blocked users</button></div>
 </template>
 
 <script>
@@ -20,7 +20,8 @@ export default {
   data() {
     return {
         user: { Firstname: "", Lastname: ""},
-        doctors:""
+        doctors:"",
+        role:""
     };
   },
 
@@ -59,6 +60,7 @@ export default {
   },
   async created() {
     this.doctors = await this.getAllDoctors();
+    this.role = localStorage.getItem("role");
   }
 };
 </script>

@@ -66,7 +66,7 @@ namespace project_backend.Service
             return isExists;
         }
 
-        internal object Authenticate(string email, string passwordd)
+        public object Authenticate(string email, string passwordd)
         {
             User u = _userRepository.FindUserByEmail(email);
             if (u == null) {
@@ -94,7 +94,7 @@ namespace project_backend.Service
             return userDTOs;
         }
 
-        internal List<UserDTO> findAllMaliciousUsers()
+        public List<UserDTO> findAllMaliciousUsers()
         {
             List<User> users = _userRepository.findAllMaliciousUsers();
             List<UserDTO> userDTOs = new List<UserDTO>();
@@ -105,7 +105,7 @@ namespace project_backend.Service
             return userDTOs;
         }
 
-        internal List<UserDTO> findAllBlockedUsers()
+        public List<UserDTO> findAllBlockedUsers()
         {
             List<User> users = _userRepository.findAllBlockedUsers();
             List<UserDTO> userDTOs = new List<UserDTO>();
@@ -125,7 +125,7 @@ namespace project_backend.Service
 
         }
 
-        internal void dontBlock(int id)
+        public void dontBlock(int id)
         {
             User user = _userRepository.FindUserById(id);
             user.IsBlocked = false;
@@ -133,7 +133,7 @@ namespace project_backend.Service
             _userRepository.UpdateUser(user);
         }
 
-        internal void unBlock(int id)
+        public void unBlock(int id)
         {
             User user = _userRepository.FindUserById(id);
             user.IsBlocked = false;
@@ -160,6 +160,12 @@ namespace project_backend.Service
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        public User findById(int v)
+        {
+            User u = _userRepository.FindUserById(v);
+            return u;
         }
     }
 }

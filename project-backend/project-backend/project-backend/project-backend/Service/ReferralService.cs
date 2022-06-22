@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using project_backend.Adapter;
 using project_backend.DTO;
 using project_backend.Models;
 using project_backend.Repository;
@@ -35,22 +36,14 @@ namespace project_backend.Service
             _userRepository = userRepository;
             _appointmentRepository = appointmentRepository;
         }
-        internal void addReferral(ReferralDTO referralDTO)
+        public void addReferral(ReferralDTO referralDTO)
         {
-            //kreirati fajl!!!!!!!!!!!!!
-            Referral referral = new Referral();
-            referral.Id = GenerateId();
-            Debug.WriteLine("Doctor je"+referralDTO.DoctorName);
-            Debug.WriteLine("SPecijaliste je"+referralDTO.SelectedSpecialist);
-            Debug.WriteLine("Pacijent je"+ referralDTO.SelecterPatient);
             User patient= _userRepository.FindUserByFirstname(referralDTO.SelecterPatient.Split(" ")[0]);
             User specialist= _userRepository.FindUserByFirstname(referralDTO.SelectedSpecialist.Split(" ")[0]);
             User doctor = _userRepository.FindUserByFirstname(referralDTO.DoctorName);
-            referral.PatientId = patient.UserId;
-            referral.SpecialistId = specialist.UserId;
-            referral.DoctorId = doctor.UserId;
-            referral.Reason = referralDTO.Reason;
 
+            int id = GenerateId();
+            Referral referral = ReferralAdapter.ReferralDTOToRefferal(id,referralDTO,patient,specialist,doctor);
 
             FreeAppointment freeAppointment = _appointmentRepository.find(referralDTO.Id);
             freeAppointment.IsFree = false;
@@ -82,13 +75,10 @@ namespace project_backend.Service
 
             try
             {
-                // Check if file already exists. If yes, delete it.     
                 if (File.Exists(fileName))
                 {
                     File.Delete(fileName);
-                }
-
-                // Create a new file     
+                }  
                 using (StreamWriter sw = File.CreateText(fileName))
                 {
                     sw.WriteLine("Referral letter:");

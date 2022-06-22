@@ -32,7 +32,7 @@ namespace project_backend.Service
             _userRepository = userRepository;
         }
 
-        internal void setPublic(int id)
+        public void setPublic(int id)
         {
             HospitalFeedback hospitalFeedback= _hospitalFeedbackRepository.FindById(id);
             hospitalFeedback.IsPosted = true;
@@ -50,7 +50,7 @@ namespace project_backend.Service
             _hospitalFeedbackRepository.AddHospitalFeedback(hospitalFeedback);
         }
 
-        internal void removePublic(int id)
+        public void removePublic(int id)
         {
             HospitalFeedback hospitalFeedback = _hospitalFeedbackRepository.FindById(id);
             hospitalFeedback.IsPosted = false;

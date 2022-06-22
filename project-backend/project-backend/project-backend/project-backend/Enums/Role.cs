@@ -7,8 +7,9 @@ namespace project_backend.Enums
 {
     public enum Role
     {
-        PATIENT,
-        DOCTOR,
-        ADMIN,
+        ROLE_PATIENT,
+        ROLE_DOCTOR,
+        ROLE_ADMIN,
+        ROLE_SPECIALIST
     }
 }

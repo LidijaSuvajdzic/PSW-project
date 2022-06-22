@@ -31,7 +31,7 @@ namespace project_backend.Service
             _prescriptionRepository = prescriptionRepository;
             _userRepository = userRepository;
         }
-        internal void AddPrescription(PrescriptionDTO prescriptionDTO)
+        public void AddPrescription(PrescriptionDTO prescriptionDTO)
         {
             User patient = _userRepository.FindUserByFirstnameAndLastname(prescriptionDTO.Patient.Split(" ")[0], prescriptionDTO.Patient.Split(" ")[1]);
             User doctor = _userRepository.FindUserByFirstnameAndLastname(prescriptionDTO.Doctor.Split(" ")[0], prescriptionDTO.Doctor.Split(" ")[1]);

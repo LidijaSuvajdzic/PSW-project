@@ -1,5 +1,6 @@
 <template>
 <div> 
+  <button @click="GoBack()">Go back</button>
     <form>
         <div class="form-group">
             <label for="name">Grade:</label>
@@ -63,7 +64,10 @@ export default {
         Comment:this.comment,
         IsAnonymously: this.IsAnonymously
         }, {headers}) 
-        }
+        },
+            async GoBack() {
+        this.$router.push({ name: "StartPagePatient" });
+    }
     },
 
 };

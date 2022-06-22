@@ -165,6 +165,43 @@ namespace project_backend.Migrations
                     b.ToTable("hospitalFeedback");
                 });
 
+            modelBuilder.Entity("project_backend.Models.Medicament", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id");
+
+                    b.Property<string>("Name")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnName("quantity");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("medicaments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Paracetamol",
+                            Quantity = 200
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Diklofen",
+                            Quantity = 100
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Brufen",
+                            Quantity = 300
+                        });
+                });
+
             modelBuilder.Entity("project_backend.Models.Penal", b =>
                 {
                     b.Property<int>("PenalId")
@@ -206,6 +243,23 @@ namespace project_backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("prescription");
+                });
+
+            modelBuilder.Entity("project_backend.Models.Procurement", b =>
+                {
+                    b.Property<int>("ProcurementId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("procurementId");
+
+                    b.Property<string>("MedicamentName")
+                        .HasColumnName("medicamentName");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnName("quantity");
+
+                    b.HasKey("ProcurementId");
+
+                    b.ToTable("procurements");
                 });
 
             modelBuilder.Entity("project_backend.Models.Referral", b =>
@@ -312,7 +366,7 @@ namespace project_backend.Migrations
                             Lastname = "Suvajdzic",
                             Passwordd = "1234567890",
                             Penals = 0,
-                            Role = "ADMIN"
+                            Role = "ROLE_ADMIN"
                         },
                         new
                         {
@@ -325,7 +379,7 @@ namespace project_backend.Migrations
                             Lastname = "Arsin",
                             Passwordd = "1234567890",
                             Penals = 0,
-                            Role = "DOCTOR"
+                            Role = "ROLE_DOCTOR"
                         },
                         new
                         {
@@ -338,7 +392,7 @@ namespace project_backend.Migrations
                             Lastname = "Peric",
                             Passwordd = "1234567890",
                             Penals = 0,
-                            Role = "DOCTOR"
+                            Role = "ROLE_DOCTOR"
                         },
                         new
                         {
@@ -351,7 +405,7 @@ namespace project_backend.Migrations
                             Lastname = "Simic",
                             Passwordd = "1234567890",
                             Penals = 0,
-                            Role = "DOCTOR"
+                            Role = "ROLE_DOCTOR"
                         },
                         new
                         {
@@ -364,7 +418,7 @@ namespace project_backend.Migrations
                             Lastname = "Peric",
                             Passwordd = "1234567890",
                             Penals = 0,
-                            Role = "SPECIALIST"
+                            Role = "ROLE_SPECIALIST"
                         },
                         new
                         {
@@ -377,7 +431,7 @@ namespace project_backend.Migrations
                             Lastname = "Simic",
                             Passwordd = "1234567890",
                             Penals = 0,
-                            Role = "SPECIALIST"
+                            Role = "ROLE_SPECIALIST"
                         },
                         new
                         {
@@ -390,7 +444,7 @@ namespace project_backend.Migrations
                             Lastname = "Peric",
                             Passwordd = "1234567890",
                             Penals = 0,
-                            Role = "PATIENT"
+                            Role = "ROLE_PATIENT"
                         },
                         new
                         {
@@ -403,7 +457,7 @@ namespace project_backend.Migrations
                             Lastname = "Simic",
                             Passwordd = "1234567890",
                             Penals = 0,
-                            Role = "PATIENT"
+                            Role = "ROLE_PATIENT"
                         });
                 });
 #pragma warning restore 612, 618
